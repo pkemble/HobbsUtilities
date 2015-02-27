@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.kemblep.hobbsutilities.MainActivity$PlaceholderFragment" >
+    
+    <TextView 
+        android:id="@+id/quick_add_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quick_add_intro" />
+    
+    <EditText 
+        android:id="@+id/quick_add_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quick_add_intro"
+        android:inputType="number"
+        android:minEms="3"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/quick_add_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_alignBaseline="@+id/quick_add_entry"
+        android:layout_alignBottom="@+id/quick_add_entry"
+        android:layout_toRightOf="@+id/quick_add_entry"
+        android:text="0.0"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/quick_add_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/quick_add_total"
+        android:layout_below="@+id/quick_add_entry"
+        android:text="@string/quick_add_reset_button" />
+
+    <ListView
+        android:id="@+id/quick_add_tally"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/quick_add_intro"
+        android:layout_alignTop="@+id/quick_add_entry" >
+    </ListView>
+
+</RelativeLayout>
