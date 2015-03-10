@@ -9,7 +9,7 @@
     tools:context="com.kemblep.hobbsutilities.MainActivity$PlaceholderFragment" >
 
     <TextView
-        android:id="@+id/section_label"
+        android:id="@+id/introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/introduction" />
@@ -27,7 +27,7 @@
 	        android:layout_height="wrap_content"
 			android:layout_below="@+id/times_result"
 			android:layout_centerHorizontal="true"
-	        android:textSize="30sp" />"
+	        android:textSize="30sp" />
 
 	    <EditText
 	        android:id="@+id/start_time_entry"
@@ -60,7 +60,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBaseline="@+id/oops_button"
 	        android:layout_alignBottom="@+id/oops_button"
-	        android:layout_alignLeft="@+id/total"
+	        android:layout_alignStart="@+id/total"
 	        android:text="@string/reset_button_text" />
 
 </RelativeLayout>

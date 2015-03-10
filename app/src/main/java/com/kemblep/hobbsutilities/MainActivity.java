@@ -1,18 +1,14 @@
 package com.kemblep.hobbsutilities;
 
-import java.util.Locale;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -21,37 +17,30 @@ import android.widget.TextView;
 
 import com.kemblep.hobbsutilities.obj.WxReport;
 
-@SuppressWarnings("deprecation")
-public class MainActivity extends ActionBarActivity implements
-		ActionBar.TabListener {
+import java.util.Locale;
+
+public class MainActivity extends FragmentActivity {
 
 	private static final String ARG_SECTION_NUMBER = "section_number";
 	private static String I_COME_FROM_THE_WIDGET = "WxWidgetClick";
 	public static String stationId = null;
 	public static String sodaStationId = null;
 	public static WxReport WeatherReport;
-			
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
-	 * derivative, which will keep every loaded fragment in memory. If this
-	 * becomes too memory intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
 
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
+	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
-	
-	@Override
-	protected void onNewIntent(Intent intent) {
-		if(intent.getAction().equals(I_COME_FROM_THE_WIDGET)){
-			getSupportActionBar().setSelectedNavigationItem(2);
-		}
-		super.onNewIntent(intent);
-	}
+//
+//    /**
+//     * On a widget click go to the TAF tab
+//     * @param intent
+//     */
+//	@Override
+//	protected void onNewIntent(Intent intent) {
+//		if(intent.getAction().equals(I_COME_FROM_THE_WIDGET)){
+//			mViewPager.setCurrentItem(2);
+//		}
+//		super.onNewIntent(intent);
+//	}
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +50,6 @@ public class MainActivity extends ActionBarActivity implements
 		SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 		stationId = sharedPref.getString(getString(R.string.pref_default_station_key), "KBED");
 		sodaStationId = sharedPref.getString(getString(R.string.pref_default_soda_station_key), "KBED");
-		
-
-		// Set up the action bar.
-		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -83,30 +67,43 @@ public class MainActivity extends ActionBarActivity implements
 				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
+                        // When the given tab is selected, switch to the corresponding page in
+                        // the ViewPager.
+                   		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                        if(position == 0){
+                            EditText e = (EditText) findViewById(R.id.start_time_entry);
+                            if(e != null) e.requestFocus();
+                            imm.showSoftInput(e, 0);
+                        }
+
+                        if(position == 1){
+                            EditText e = (EditText) findViewById(R.id.quick_add_entry);
+                            if(e != null) e.requestFocus();
+                            imm.showSoftInput(e, 0);
+                        }
+
+                        if(position == 2){
+                            TextView t = (TextView) findViewById(R.id.tv_metar);
+                            imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
+                        }
+
+                        if(position == 3){
+                            TextView t = (TextView) findViewById(R.id.tv_exploding_soda);
+                            imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
+                        }
 					}
 				});
 		
 		mViewPager.setOffscreenPageLimit(3);
 
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
-		}
-		
 		//get the weather
 		WeatherReport = new WxReport(stationId);
-		
+
 		//set the wx tab if needed
 		Intent intent = getIntent();
 		if(intent.getAction().equals(I_COME_FROM_THE_WIDGET)){
-			actionBar.setSelectedNavigationItem(2);
+			mViewPager.setCurrentItem(2);
 		}
 	}
 
@@ -127,49 +124,6 @@ public class MainActivity extends ActionBarActivity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		int selectedTab = tab.getPosition(); 
-		mViewPager.setCurrentItem(selectedTab);
-		if(selectedTab == 0){
-			EditText e = (EditText) findViewById(R.id.start_time_entry);
-			if(e != null) e.requestFocus();
-			imm.showSoftInput(e, 0);
-		}
-		
-		if(selectedTab == 1){
-			EditText e = (EditText) findViewById(R.id.quick_add_entry);
-			if(e != null) e.requestFocus();
-			imm.showSoftInput(e, 0);
-		}
-		
-		if(selectedTab == 2){
-			TextView t = (TextView) findViewById(R.id.tv_metar);
-			imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
-		}
-		
-		if(selectedTab == 3){
-			TextView t = (TextView) findViewById(R.id.tv_exploding_soda);
-			imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
-		}
-
-	}
-
-	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-	}
-
-	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
 	}
 
 	/**
