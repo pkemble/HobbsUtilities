@@ -5,29 +5,27 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.kemblep.hobbsutilities.obj.Forecast;
 import com.kemblep.hobbsutilities.obj.StationInfo;
 
+//import android.widget.ImageView;
+
 public class ExplodingSodaFragment extends Fragment {
 	
 	private String _sodaStationId = MainActivity.sodaStationId;
 
 	public ExplodingSodaFragment() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -41,14 +39,14 @@ public class ExplodingSodaFragment extends Fragment {
 		final TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info);
 		//final Button btnSodaRefresh = (Button) sodaView.findViewById(R.id.btn_soda_refresh);
 		final Button btnSodaStation = (Button) sodaView.findViewById(R.id.btn_soda_station);
-		final ImageView imgSoda = (ImageView) sodaView.findViewById(R.id.img_soda);
+		//final ImageView imgSoda = (ImageView) sodaView.findViewById(R.id.img_soda);
 		
 		//http://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=stations&requestType=retrieve&format=xml&stationString=<STATION>
 		
 		//send the request
 		GetSodaFate(sodaView);
 		
-		imgSoda.setOnClickListener(new View.OnClickListener() {
+		tvTemp.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -68,7 +66,7 @@ public class ExplodingSodaFragment extends Fragment {
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String newStationId = input.getText().toString().trim();
-						if(newStationId.length() == 3){
+						if(newStationId.length() == 3 && !Character.isDigit(newStationId.charAt(0))){
 							newStationId = "K" + newStationId;
 						}
 						_sodaStationId = newStationId;
@@ -109,23 +107,31 @@ public class ExplodingSodaFragment extends Fragment {
 		spinner.setVisibility(View.GONE);
 		String result;
 		TextView tvTemp = (TextView) sodaView.findViewById(R.id.tv_exploding_soda);
-		ImageView imgSoda = (ImageView) sodaView.findViewById(R.id.img_soda);
+		//ImageView imgSoda = (ImageView) sodaView.findViewById(R.id.img_soda);
 		{
-			Float low = Float.parseFloat(forecast.NextLow);
-			if(low <= 32){
-				result = forecast.NextLow;
-				tvTemp.setTextColor(getResources().getColor(R.color.exploding_soda_orange));
-				imgSoda.setImageResource(R.drawable.soda_plode);
-			} else {
-				result = forecast.NextLow;
-				tvTemp.setTextColor(getResources().getColor(R.color.safe_soda_green));
-				imgSoda.setImageResource(R.drawable.soda);
-			}
-			
+//			if(forecast.NextLow <= 32){
+//				result = forecast.NextLow.toString();
+//				tvTemp.setTextColor(getResources().getColor(R.color.exploding_soda_orange));
+//				//imgSoda.setImageResource(R.drawable.soda_plode);
+//			} else {
+//				result = forecast.NextLow.toString();
+//				tvTemp.setTextColor(getResources().getColor(R.color.safe_soda_green));
+//				//imgSoda.setImageResource(R.drawable.soda);
+//			}
+
+			TextView tvForecastGrid = (TextView) sodaView.findViewById(R.id.forecast_grid);
+            if(!forecast.FCTimeTempMap.TimePeriods.isEmpty() && tvForecastGrid != null){
+                for (int i=0; i < 3; i++){
+                    String pn = forecast.FCTimeTempMap.TimePeriods.get(i).PeriodName;
+                    String pt = forecast.FCTimeTempMap.TimePeriods.get(i).Temperature.toString();
+                    tvForecastGrid.append(pn + ":" + pt + " | ");
+                }
+            }
+
 			TextView tvSodaTime = (TextView) sodaView.findViewById(R.id.tv_soda_time);
-			TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info); 
+			TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info);
 			
-			tvTemp.setText(result + (char) 0x00B0 + "F");
+			//tvTemp.setText(result + (char) 0x00B0 + "F");
 			Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
 			Util.setText(tvMoreInfo, stationInfo.SiteId + " : " + forecast.Description + "\n" + forecast.moreInfoUrl);
 			

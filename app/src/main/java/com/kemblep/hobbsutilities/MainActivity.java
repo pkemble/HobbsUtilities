@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -19,7 +19,7 @@ import com.kemblep.hobbsutilities.obj.WxReport;
 
 import java.util.Locale;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
 	private static final String ARG_SECTION_NUMBER = "section_number";
 	private static String I_COME_FROM_THE_WIDGET = "WxWidgetClick";
@@ -29,6 +29,7 @@ public class MainActivity extends FragmentActivity {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
+
 //
 //    /**
 //     * On a widget click go to the TAF tab
@@ -50,6 +51,8 @@ public class MainActivity extends FragmentActivity {
 		SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 		stationId = sharedPref.getString(getString(R.string.pref_default_station_key), "KBED");
 		sodaStationId = sharedPref.getString(getString(R.string.pref_default_soda_station_key), "KBED");
+
+        //ActionBar toolbar = getSupportActionBar();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -120,11 +123,8 @@ public class MainActivity extends FragmentActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+    }
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

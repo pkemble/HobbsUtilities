@@ -1,7 +1,5 @@
 package com.kemblep.hobbsutilities;
 
-import com.kemblep.hobbsutilities.obj.WxReport;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
@@ -18,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
+import com.kemblep.hobbsutilities.obj.WxReport;
 
 public class WxMainFragment extends Fragment {
 	
@@ -62,8 +62,8 @@ public class WxMainFragment extends Fragment {
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String newStationId = input.getText().toString().trim();
-						if(newStationId.length() == 3){
-							newStationId = "K" + newStationId;
+						if(newStationId.length() == 3 && !Character.isDigit(newStationId.charAt(0))){
+                            newStationId = "K" + newStationId;
 						}
 						_stationId = newStationId;
 						btnStation.setText(newStationId);

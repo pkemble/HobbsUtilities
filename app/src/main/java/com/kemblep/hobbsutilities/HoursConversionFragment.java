@@ -1,12 +1,5 @@
 package com.kemblep.hobbsutilities;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class HoursConversionFragment extends Fragment {
 	
 	private static final String TAG = HoursConversionFragment.class.getName();
@@ -32,7 +32,7 @@ public class HoursConversionFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		final View rootView = inflater.inflate(R.layout.fragment_main, container,
+		final View rootView = inflater.inflate(R.layout.fragment_convert_times, container,
 				false);
 		
 		final EditText startTimeEntry = (EditText) rootView.findViewById(R.id.start_time_entry);
@@ -45,8 +45,13 @@ public class HoursConversionFragment extends Fragment {
 				
 		TextWatcher startTimeWatcher = new TextWatcher() {
 			//this is the watcher and functions for the first, i.e. start time entry
-			
-			@Override
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				//if the start time has been entered, focus on the end time
 				//unless it's also already been entered
@@ -68,21 +73,20 @@ public class HoursConversionFragment extends Fragment {
 				}
 			}
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-			}
-			
-			@Override
-			public void afterTextChanged(Editable start) {
-				// TODO Auto-generated method stub
-			}
-		};
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
 		
 		TextWatcher endTimeWatcher = new TextWatcher() {
-			
-			@Override
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
 			public void onTextChanged(CharSequence end, int start, int before, int count) {
 				if(end.length() >= 4 && !verifyTimes(startTimeEntry, endTimeEntry)){
 					//nullify any further input
@@ -91,20 +95,20 @@ public class HoursConversionFragment extends Fragment {
 					}
 					return;
 				}
-				
+
 				//if the end time has been entered, focus on the start time
 				//unless it's also already been entered
 				if (end.toString().length() == 4 && startTimeEntry.length() < 4){
-					
+
 					Util.resetEditText(startTimeEntry);
 					startTimeEntry.requestFocus();
 				}
-				
+
 				//both times have been entered, do the math
 				if (end.toString().length() == 4 && startTimeEntry.length() == 4) {
 					convertTimes(startTimeEntry, endTimeEntry);
 				}
-				
+
 				//here, we assume the next time is being put in so we reset everything
 				if(end.toString().length() > 4){
 					resetTimes();
@@ -112,25 +116,17 @@ public class HoursConversionFragment extends Fragment {
 					String extra = end.toString();
 					startTimeEntry.setText(extra.substring(extra.length() - 1));
 					startTimeEntry.setSelection(1);
-					
-					//for future implementation, add to the running tally
-				}				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable end) {
-				
 
+					//for future implementation, add to the running tally
+				}
 			}
-		};
-		
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
 		OnClickListener timesClickListener = new OnClickListener() {
 			
 			@Override
@@ -265,7 +261,6 @@ public class HoursConversionFragment extends Fragment {
 			
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.v(TAG, e.getMessage());
 		}

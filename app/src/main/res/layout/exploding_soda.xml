@@ -27,24 +27,28 @@
 		    tools:context="com.kemblep.hobbsutilities.MainActivity$PlaceholderFragment" >
 
 		    	    
-		    <ImageView
-		        android:id="@+id/img_soda"
-		        android:scaleType="centerInside"
-				android:layout_centerHorizontal="true"
-		        android:layout_width="wrap_content"
-		        android:layout_height="300dp"
-		        android:clickable="true"
-		        android:contentDescription="@string/title_soda" />
+		    <!--<ImageView-->
+		        <!--android:id="@+id/img_soda"-->
+		        <!--android:scaleType="centerInside"-->
+				<!--android:layout_centerHorizontal="true"-->
+		        <!--android:layout_width="wrap_content"-->
+		        <!--android:layout_height="300dp"-->
+		        <!--android:clickable="true"-->
+		        <!--android:contentDescription="@string/title_soda" />-->
 		    
 		    <TextView
 		        android:id="@+id/tv_exploding_soda"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 				android:layout_centerHorizontal="true"
-		        android:layout_below="@+id/img_soda"
-		        android:layout_marginTop="-100dp"
 		        android:textSize="128sp"
 		        android:autoLink="web" />
+
+            <TextView
+                android:id="@+id/forecast_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="12dp"/>
 		        
 		    <TextView
 		        android:id="@+id/tv_soda_time"
