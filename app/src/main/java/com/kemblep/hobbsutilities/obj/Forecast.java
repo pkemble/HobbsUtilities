@@ -1,26 +1,30 @@
 package com.kemblep.hobbsutilities.obj;
 
+import android.graphics.Bitmap;
+
+import com.kemblep.hobbsutilities.GetMap;
 import com.kemblep.hobbsutilities.GetWx;
+import com.kemblep.hobbsutilities.Strings;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class Forecast {
-	private String _url = WxReport.ForecastUrl;
+	private String _forecastUrl = Strings.ForecastUrl;
+    private String _mapUrl = Strings.GoogleMapUrl;
 	public String Description;
 	public String moreInfoUrl;
 	private String _noData;
-	private String _descriptionTextField = WxReport.DescriptionTextField;
-	private String _temperatureTextField = WxReport.TemperatureTextfield;
+	private String _descriptionTextField = Strings.DescriptionTextField;
+	private String _temperatureTextField = Strings.TemperatureTextfield;
 	private String _values = WxReport.ValueTextField;
+    public Bitmap MapForecastLocation;
     public TimeTempMap FCTimeTempMap = new TimeTempMap();
 
     public class TimeTempMap {
@@ -33,7 +37,7 @@ public class Forecast {
         public String PeriodName;
         public Date PeriodStart;
         public Date PeriodEnd;
-        public Float Temperature;
+        public int Temperature;
     }
 
     public Forecast(String latitude, String longitude){
@@ -41,12 +45,10 @@ public class Forecast {
 		//TODO serialize all the node names
 		Document doc;
 		try {
-			_url = _url.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude);
-			doc = new GetWx().execute(_url).get();
+            MapForecastLocation = new GetMap().execute(_mapUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude)).get();
+			_forecastUrl = _forecastUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude);
+			doc = new GetWx().execute(_forecastUrl).get();
 			if(doc != null){
-				//String layoutKey = new String();
-				//ArrayList<String> minimums = new ArrayList<String>();
-				//ArrayList<String> timePeriods = new ArrayList<String>();
 				NodeList data = doc.getElementsByTagName("data");
 				for (int i = 0; i < data.getLength(); i++){
 					if(getNodeAttributeValue(data.item(i), "type").equalsIgnoreCase("forecast")){
@@ -76,7 +78,7 @@ public class Forecast {
 										for (int k = 0; k < valueMins.getLength(); k++){
 											if(valueMins.item(k).getNodeName().equalsIgnoreCase("value")){
                                                 TimePeriod timePeriod = new TimePeriod();
-											    timePeriod.Temperature = Float.parseFloat(valueMins.item(k).getTextContent());
+											    timePeriod.Temperature = Integer.parseInt(valueMins.item(k).getTextContent());
                                                 FCTimeTempMap.TimePeriods.add(timePeriod);
 											} else if(valueMins.item(k).getNodeName().equalsIgnoreCase("name")) {
                                                 FCTimeTempMap.Name = valueMins.item(k).getTextContent();
@@ -101,22 +103,12 @@ public class Forecast {
                                         if(pn != null) {
                                             String pt = periodList.item(n).getTextContent();
                                             FCTimeTempMap.TimePeriods.get(z).PeriodName = pn;
-                                            //FCTimeTempMap.TimePeriods.get(z).PeriodStart = extractStartDate(pt);
-                                            //FCTimeTempMap.TimePeriods.get(z).PeriodEnd = extractEndDate(pt);
                                             z++;
                                         }
 									}
 								}
 							}
 						}
-						
-						//create a hash map of time periods and temps
-//						if(minimums.size() == timePeriods.size()){
-//							TimeTempMap = new HashMap<String, String>();
-//							for(int p = 0; p < minimums.size(); p++){
-//								TimeTempMap.put(timePeriods.get(p), minimums.get(p));
-//							}
-//						}
 					}
 				}
 				
@@ -124,18 +116,6 @@ public class Forecast {
 					Node descNode = doc.getElementsByTagName(_descriptionTextField).item(0);
 					if(descNode != null) Description = descNode.getTextContent();
 				}
-//				NodeList values = doc.getElementsByTagName(_values);
-//				if(values.getLength() > 0){
-//					NextLow = values.item(0).getTextContent();
-//				}
-//				if(FCTimeTempMap != null && !FCTimeTempMap.TimePeriods.isEmpty()){
-//                    for (int i = 0; i < FCTimeTempMap.TimePeriods.size(); i++){
-//                        if(FCTimeTempMap.TimePeriods.get(i).PeriodName.equalsIgnoreCase("Tonight")){
-//                            NextLow = FCTimeTempMap.TimePeriods.get(i).Temperature;
-//                        }
-//                    }
-//
-//				}
 			}
 		} 
 		catch (InterruptedException | ExecutionException e) {
@@ -143,17 +123,6 @@ public class Forecast {
 			e.printStackTrace();
 		} 
 	}
-
-    private Date extractStartDate(String periodText) {
-        //2015-03-10T06:00:00-05:00
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-SSSS....");
-        try {
-            return sdf.parse(periodText);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     private Node getNodeByAttributeValue(NodeList nodeList, String nodeAttribute, String nodeAttributeValue){
 		for (int i = 0; i < nodeList.getLength(); i++){

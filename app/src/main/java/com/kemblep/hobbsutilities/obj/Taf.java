@@ -1,27 +1,25 @@
 package com.kemblep.hobbsutilities.obj;
 
-import java.util.concurrent.ExecutionException;
+import com.kemblep.hobbsutilities.GetWx;
+import com.kemblep.hobbsutilities.Strings;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.kemblep.hobbsutilities.GetWx;
-
-import android.content.Context;
-import android.content.res.Resources;
+import java.util.concurrent.ExecutionException;
 
 //https://aviationweather.gov/dataserver/fields?datatype=taf
 //line breaks before TEMPO & FM
 
 public class Taf {
-	private String _url = WxReport.TafUrl;
-	private String _radiusUrl = WxReport.TafRadiusUrl;
+	private String _url = Strings.TafUrl;
+	private String _radiusUrl = Strings.TafRadiusUrl;
 	private String _station;
 	private String _time;
 	private String[] fmPeriod = null;
 	private String _noData; 
 	public String FormattedTaf;
-	private String _tafRawTextField = WxReport.RawTextField;
+	private String _tafRawTextField = Strings.RawTextField;
 	
 	public Taf(String station) {
 		_noData = "No TAF data for station within 10 miles " + station;

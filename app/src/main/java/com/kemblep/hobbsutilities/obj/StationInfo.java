@@ -1,23 +1,24 @@
 package com.kemblep.hobbsutilities.obj;
 
-import java.util.concurrent.ExecutionException;
+import com.kemblep.hobbsutilities.GetWx;
+import com.kemblep.hobbsutilities.Strings;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.kemblep.hobbsutilities.GetWx;
+import java.util.concurrent.ExecutionException;
 
 public class StationInfo {
-	private String _url = WxReport.StationInfoUrl;
+	private String _url = Strings.StationInfoUrl;
 	public String Latitude;
 	public String Longitude;
 	//response data station site
 	public String SiteName;
 	public String SiteId;
 	private String _noData;
-	private String _siteNameField = WxReport.SiteNameField;;
-	private String _latitudeTextField = WxReport.LatitudeTextField;
-	private String _longitudeTextField = WxReport.LongitudeTextField;
+	private String _siteNameField = Strings.SiteNameField;;
+	private String _latitudeTextField = Strings.LatitudeTextField;
+	private String _longitudeTextField = Strings.LongitudeTextField;
 	
 	public StationInfo(String stationId){
 		

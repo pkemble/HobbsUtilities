@@ -1,17 +1,16 @@
 package com.kemblep.hobbsutilities;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
+import org.w3c.dom.Document;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-
-import android.content.res.Resources;
-import android.os.AsyncTask;
-import android.util.Log;
 
 public class GetWx extends AsyncTask<String, Void, Document> {
 
@@ -41,9 +40,9 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 			Log.d(TAG, "Input stream received from " + url);
 			doc = parseXML(is);
 			//Log.d(TAG, "Done parsing stream from" + url);
-			huc.disconnect();
-			//Log.d(TAG, "Disconnected from " + url);
-			
+            huc.disconnect();
+            //Log.d(TAG, "Disconnected from " + url);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,4 +70,3 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 	        return doc;
 	}
 }
-

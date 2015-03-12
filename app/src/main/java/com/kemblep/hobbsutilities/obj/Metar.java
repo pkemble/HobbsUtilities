@@ -1,25 +1,22 @@
 package com.kemblep.hobbsutilities.obj;
 
-import java.util.Date;
-import java.util.concurrent.ExecutionException;
+import com.kemblep.hobbsutilities.GetWx;
+import com.kemblep.hobbsutilities.Strings;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.kemblep.hobbsutilities.GetWx;
-
-import android.content.Context;
-import android.content.res.Resources;
+import java.util.concurrent.ExecutionException;
 
 public class Metar {
-	private String _url = WxReport.MetarUrl;
+	private String _url = Strings.MetarUrl;
 	public String FormattedMetar;
 	public String Latitude;
 	public String Longitude;
 	private String _noData;
-	private String _metarRawTextField = WxReport.RawTextField;
-	private String _latitudeTextField = WxReport.LatitudeTextField;
-	private String _longitudeTextField = WxReport.LongitudeTextField;
+	private String _metarRawTextField = Strings.RawTextField;
+	private String _latitudeTextField = Strings.LatitudeTextField;
+	private String _longitudeTextField = Strings.LongitudeTextField;
 	
 	public Metar(String station){
 		

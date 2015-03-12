@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.kemblep.hobbsutilities.obj.WxReport;
 
@@ -50,7 +49,13 @@ public class MainActivity extends ActionBarActivity {
 
 		SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 		stationId = sharedPref.getString(getString(R.string.pref_default_station_key), "KBED");
+        if(stationId.isEmpty()){
+            stationId = "KBED";
+        }
 		sodaStationId = sharedPref.getString(getString(R.string.pref_default_soda_station_key), "KBED");
+        if(sodaStationId.isEmpty()){
+            sodaStationId = "KBED";
+        }
 
         //ActionBar toolbar = getSupportActionBar();
 
@@ -87,13 +92,11 @@ public class MainActivity extends ActionBarActivity {
                         }
 
                         if(position == 2){
-                            TextView t = (TextView) findViewById(R.id.tv_metar);
-                            imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
+                            imm.hideSoftInputFromWindow(findViewById(R.id.tv_metar).getWindowToken(), 0);
                         }
 
                         if(position == 3){
-                            TextView t = (TextView) findViewById(R.id.tv_exploding_soda);
-                            imm.hideSoftInputFromWindow(t.getWindowToken(), 0);
+                            imm.hideSoftInputFromWindow(findViewById(R.id.lv_forecast).getWindowToken(), 0);
                         }
 					}
 				});
