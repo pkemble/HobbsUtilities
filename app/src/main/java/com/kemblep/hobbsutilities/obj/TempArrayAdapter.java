@@ -55,6 +55,8 @@ public class TempArrayAdapter extends BaseAdapter{
         fcLabel.setText(timePeriod.PeriodName);
         if(timePeriod.Temperature < 32){
             fcTemp.setTextColor(parent.getResources().getColor(R.color.exploding_soda_orange));
+        } else {
+            fcTemp.setTextColor(parent.getResources().getColor(R.color.safe_soda_green));
         }
 
         fcTemp.setText(Integer.toString(timePeriod.Temperature) + (char) 0x00B0 + "F");

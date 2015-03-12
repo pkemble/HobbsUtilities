@@ -21,30 +21,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="hobbsutilities" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d92f2c1d-63f9-42ca-a34e-311274086e21" name="Default" comment="Serialized some forecast stuff&#10;Some more actionbar stuff too">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/location32.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/GetMap.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/Strings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/listview_forecast.xml" />
-      <change type="DELETED" beforePath="C:\Users\Pete\eclipse_workspace\HobbsUtilities\.idea\libraries\appcompat_v7_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Pete\eclipse_workspace\HobbsUtilities\.idea\libraries\support_annotations_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Pete\eclipse_workspace\HobbsUtilities\.idea\libraries\support_v4_21_0_3.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Forecast.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Forecast.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/GetWx.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/GetWx.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Metar.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Metar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/kemblep/hobbsutilities/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/kemblep/hobbsutilities/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/StationInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/StationInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Taf.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Taf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/WxReport.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/WxReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/exploding_soda.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/exploding_soda.xml" />
+    <list default="true" id="d92f2c1d-63f9-42ca-a34e-311274086e21" name="Default" comment="Added location services&#10;Reformatted soda page to listview">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HobbsUtilities.iws" />
@@ -71,13 +49,13 @@
       <file leaf-file-name="ExplodingSodaFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6404834" vertical-offset="1760" max-vertical-offset="2601">
-              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.3323263" vertical-offset="1709" max-vertical-offset="2601">
+              <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding>
-                <element signature="e#2578#2606#0" expanded="true" />
-                <element signature="e#3395#3556#0" expanded="true" />
-                <element signature="e#3545#3546#0" expanded="true" />
-                <element signature="e#5831#5880#0" expanded="true" />
+                <element signature="e#2337#2365#0" expanded="true" />
+                <element signature="e#3154#3315#0" expanded="true" />
+                <element signature="e#3304#3305#0" expanded="true" />
+                <element signature="e#5590#5639#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,8 +65,10 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/GetWx.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156">
-              <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
-              <folding />
+              <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,7 +88,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="143" max-vertical-offset="748">
               <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,16 +118,16 @@
       <file leaf-file-name="TempArrayAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="632" max-vertical-offset="1224">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="751" max-vertical-offset="1224">
+              <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#776#777#0" expanded="true" />
-                <element signature="e#818#819#0" expanded="true" />
-                <element signature="e#875#876#0" expanded="true" />
-                <element signature="e#924#925#0" expanded="true" />
-                <element signature="e#981#982#0" expanded="true" />
-                <element signature="e#1012#1013#0" expanded="true" />
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#713#714#0" expanded="true" />
+                <element signature="e#770#771#0" expanded="true" />
+                <element signature="e#819#820#0" expanded="true" />
+                <element signature="e#876#877#0" expanded="true" />
+                <element signature="e#907#908#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -173,8 +155,10 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Forecast.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2346">
-              <caret line="52" column="28" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
-              <folding />
+              <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1419,8 +1403,8 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java" />
       </list>
     </option>
   </component>
@@ -1795,7 +1779,11 @@
       <created>1426049888181</created>
       <updated>1426049888181</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added location services&#10;Reformatted soda page to listview">
+      <created>1426132200906</created>
+      <updated>1426132200906</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1850,9 +1838,11 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="false" />
     <MESSAGE value="Got rid of actionBar&#10;style changes&#10;looks like some VCS / android studio / git crap too." />
     <MESSAGE value="Serialized some forecast stuff&#10;Some more actionbar stuff too" />
-    <option name="LAST_COMMIT_MESSAGE" value="Serialized some forecast stuff&#10;Some more actionbar stuff too" />
+    <MESSAGE value="Added location services&#10;Reformatted soda page to listview" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added location services&#10;Reformatted soda page to listview" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1860,19 +1850,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java</url>
-          <line>162</line>
+          <line>157</line>
           <properties />
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java</url>
-          <line>97</line>
+          <line>92</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java</url>
-          <line>146</line>
+          <line>141</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
@@ -2202,8 +2192,10 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/Forecast.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2346">
-          <caret line="52" column="28" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
-          <folding />
+          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2256,7 +2248,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="143" max-vertical-offset="748">
           <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2273,22 +2267,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="714">
           <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="632" max-vertical-offset="1224">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#776#777#0" expanded="true" />
-            <element signature="e#818#819#0" expanded="true" />
-            <element signature="e#875#876#0" expanded="true" />
-            <element signature="e#924#925#0" expanded="true" />
-            <element signature="e#981#982#0" expanded="true" />
-            <element signature="e#1012#1013#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2318,21 +2296,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/GetWx.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="281" max-vertical-offset="1156">
-          <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156">
+          <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/obj/TempArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="751" max-vertical-offset="1224">
+          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#770#771#0" expanded="true" />
+            <element signature="e#819#820#0" expanded="true" />
+            <element signature="e#876#877#0" expanded="true" />
+            <element signature="e#907#908#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kemblep/hobbsutilities/ExplodingSodaFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6404834" vertical-offset="1760" max-vertical-offset="2601">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.3323263" vertical-offset="1709" max-vertical-offset="2601">
+          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
           <folding>
-            <element signature="e#2578#2606#0" expanded="true" />
-            <element signature="e#3395#3556#0" expanded="true" />
-            <element signature="e#3545#3546#0" expanded="true" />
-            <element signature="e#5831#5880#0" expanded="true" />
+            <element signature="e#2337#2365#0" expanded="true" />
+            <element signature="e#3154#3315#0" expanded="true" />
+            <element signature="e#3304#3305#0" expanded="true" />
+            <element signature="e#5590#5639#0" expanded="true" />
           </folding>
         </state>
       </provider>
