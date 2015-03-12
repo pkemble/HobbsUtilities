@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-import com.kemblep.hobbsutilities.obj.sWxReport;
+import com.kemblep.hobbsutilities.obj.WxReport;
 
 public class WxMainFragment extends Fragment {
 	
@@ -95,7 +95,7 @@ public class WxMainFragment extends Fragment {
 			return;
 		}
 		
-		sWxReport wxReport = MainActivity.WeatherReport;
+		WxReport wxReport = MainActivity.WeatherReport;
 		
 		if(tvMetar != null && tvTaf != null){
 			tvMetar.setText(wxReport.Metar.FormattedMetar);

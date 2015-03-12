@@ -16,14 +16,14 @@ import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class Forecast {
-	private String _forecastUrl = Strings.ForecastUrl;
-    private String _mapUrl = Strings.GoogleMapUrl;
+	private String mForecastUrl = Strings.ForecastUrl;
+    private String mMapUrl = Strings.GoogleMapUrl;
 	public String Description;
 	public String moreInfoUrl;
-	private String _noData;
-	private String _descriptionTextField = Strings.DescriptionTextField;
-	private String _temperatureTextField = Strings.TemperatureTextfield;
-	private String _values = sWxReport.ValueTextField;
+	private String mNoData;
+	private String mDescriptionTextField = Strings.DescriptionTextField;
+	private String mTemperatureTextField = Strings.TemperatureTextfield;
+	private String mValues = WxReport.ValueTextField;
     public Bitmap MapForecastLocation;
     public TimeTempMap FCTimeTempMap = new TimeTempMap();
 
@@ -41,13 +41,14 @@ public class Forecast {
     }
 
     public Forecast(String latitude, String longitude){
-		_noData = "No forecast :(";
-		//TODO serialize all the node names
+		mNoData = "No forecast :(";
+		//TODO: serialize all the node names
+        //TODO: handle a garbage or empty forecast
 		Document doc;
 		try {
-            MapForecastLocation = new GetMap().execute(_mapUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude)).get();
-			_forecastUrl = _forecastUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude);
-			doc = new GetWx().execute(_forecastUrl).get();
+            MapForecastLocation = new GetMap().execute(mMapUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude)).get();
+			mForecastUrl = mForecastUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude);
+			doc = new GetWx().execute(mForecastUrl).get();
 			if(doc != null){
 				NodeList data = doc.getElementsByTagName("data");
 				for (int i = 0; i < data.getLength(); i++){
@@ -113,7 +114,7 @@ public class Forecast {
 				}
 				
 				if(data.getLength() > 0){
-					Node descNode = doc.getElementsByTagName(_descriptionTextField).item(0);
+					Node descNode = doc.getElementsByTagName(mDescriptionTextField).item(0);
 					if(descNode != null) Description = descNode.getTextContent();
 				}
 			}

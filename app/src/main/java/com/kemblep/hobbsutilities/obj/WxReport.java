@@ -2,13 +2,13 @@ package com.kemblep.hobbsutilities.obj;
 
 import com.kemblep.hobbsutilities.Util;
 
-public class sWxReport {
+public class WxReport {
 	public String FullReport;
 	public Metar Metar;
 	public Taf Taf;
 	public String FetchedTime;
 
-	public sWxReport(String station){
+	public WxReport(String station){
 		Metar = new Metar(station);
 		Taf = new Taf(station);
 		FullReport = _fullReport();

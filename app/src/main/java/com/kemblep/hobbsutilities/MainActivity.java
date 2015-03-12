@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.kemblep.hobbsutilities.obj.sWxReport;
+import com.kemblep.hobbsutilities.obj.WxReport;
 
 import java.util.Locale;
 
@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
 	private static final String ARG_SECTION_NUMBER = "section_number";
     public static String StationId = null;
 	public static String SodaStationId = null;
-	public static sWxReport WeatherReport;
+	public static WxReport WeatherReport;
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
@@ -103,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
 		mViewPager.setOffscreenPageLimit(3);
 
 		//get the weather
-		WeatherReport = new sWxReport(StationId);
+		WeatherReport = new WxReport(StationId);
 
 		//set the wx tab if needed
 		Intent intent = getIntent();

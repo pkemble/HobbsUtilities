@@ -6,7 +6,7 @@ import android.provider.Settings;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.kemblep.hobbsutilities.obj.sWxReport;
+import com.kemblep.hobbsutilities.obj.WxReport;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,7 +43,7 @@ public class Util {
 		}
 
 	public static void updateWx(String newStationId) {
-		MainActivity.WeatherReport = new sWxReport(newStationId);
+		MainActivity.WeatherReport = new WxReport(newStationId);
 	}
 
 	public static String getZuluTime() {

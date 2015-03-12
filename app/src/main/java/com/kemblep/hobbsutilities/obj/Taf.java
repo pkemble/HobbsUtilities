@@ -12,48 +12,48 @@ import java.util.concurrent.ExecutionException;
 //line breaks before TEMPO & FM
 
 public class Taf {
-	private String _url = Strings.TafUrl;
-	private String _radiusUrl = Strings.TafRadiusUrl;
-	private String _station;
-	private String _time;
-	private String[] fmPeriod = null;
-	private String _noData; 
+	private String mUrl = Strings.TafUrl;
+	private String mRadiusUrl = Strings.TafRadiusUrl;
+	private String mStation;
+	private String mTime;
+	private String[] mFmPeriod = null;
+	private String mNoData;
 	public String FormattedTaf;
-	private String _tafRawTextField = Strings.RawTextField;
+	private String mTafRawTextField = Strings.RawTextField;
 	
 	public Taf(String station) {
-		_noData = "No TAF data for station within 10 miles " + station;
+		mNoData = "No TAF data for station within 10 miles " + station;
 		
 		Document doc;
 		try {
-			_url = _url.replace("<STATION_ID>", station);
-			doc = new GetWx().execute(_url).get();
+			mUrl = mUrl.replace("<STATION_ID>", station);
+			doc = new GetWx().execute(mUrl).get();
 			if(doc != null){
 				//TODO cast these better
-//				_station = doc.getElementsByTagName("station_id").item(0).getTextContent();
-//				_time = doc.getElementsByTagName("issue_time").item(0).getTextContent();
-				NodeList nodeList = doc.getElementsByTagName(_tafRawTextField);
+//				mStation = doc.getElementsByTagName("station_id").item(0).getTextContent();
+//				mTime = doc.getElementsByTagName("issue_time").item(0).getTextContent();
+				NodeList nodeList = doc.getElementsByTagName(mTafRawTextField);
 				if(nodeList.getLength() == 0){
 					//try to get a radius search
 					//get a metar first
 					Metar metar = new Metar(station);
 					if(metar.Latitude != null){
 						//url is long then lat
-						_radiusUrl = _radiusUrl.replace("<LATITUDE>", metar.Latitude).replace("<LONGITUDE>", metar.Longitude).replace("<STATION>", station);
-						Document radiusDoc = new GetWx().execute(_radiusUrl).get();
+						mRadiusUrl = mRadiusUrl.replace("<LATITUDE>", metar.Latitude).replace("<LONGITUDE>", metar.Longitude).replace("<STATION>", station);
+						Document radiusDoc = new GetWx().execute(mRadiusUrl).get();
 						if(radiusDoc != null){
-							NodeList radiusTafNodes = radiusDoc.getElementsByTagName(_tafRawTextField);
+							NodeList radiusTafNodes = radiusDoc.getElementsByTagName(mTafRawTextField);
 							if(radiusTafNodes.getLength() > 0){
 								FormattedTaf = "Closest TAF within 20 miles: \n" + radiusTafNodes.item(0).getTextContent();
 							} else {
 								FormattedTaf = "No TAF data within 20 miles of " + station;
 							}
 						} else {
-							FormattedTaf = _noData;
+							FormattedTaf = mNoData;
 						}
 					}
 				} else {
-					FormattedTaf = formatRawText(doc.getElementsByTagName(_tafRawTextField).item(0).getTextContent());
+					FormattedTaf = formatRawText(doc.getElementsByTagName(mTafRawTextField).item(0).getTextContent());
 				}
 			}
 					
