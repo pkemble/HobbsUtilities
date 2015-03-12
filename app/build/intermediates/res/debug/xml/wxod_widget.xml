@@ -7,4 +7,4 @@
     android:initialLayout="@layout/wx_widget_main"
     >
 </appwidget-provider>
-<!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/xml/wxod_widget.xml -->
+<!-- From: file:/C:/Users/Pete/eclipse_workspace/HobbsUtilities/app/src/main/res/xml/wxod_widget.xml -->
