@@ -1921,7 +1921,7 @@ containing a value of this type.
         public static final int create_calendar_message=0x7f0c0033;
         public static final int create_calendar_title=0x7f0c0034;
         public static final int decline=0x7f0c0035;
-        public static final int end_time_help=0x7f0c0036;
+        public static final int block_in_time_hint =0x7f0c0036;
         public static final int introduction=0x7f0c0037;
         public static final int invalid_times=0x7f0c0038;
         public static final int loading=0x7f0c0039;
@@ -1932,7 +1932,7 @@ containing a value of this type.
         public static final int quick_add_intro=0x7f0c003e;
         public static final int quick_add_reset_button=0x7f0c003f;
         public static final int reset_button_text=0x7f0c0040;
-        public static final int start_time_help=0x7f0c0041;
+        public static final int block_out_time_hint =0x7f0c0041;
         public static final int station_entry_title=0x7f0c0042;
         public static final int store_picture_message=0x7f0c0043;
         public static final int store_picture_title=0x7f0c0044;

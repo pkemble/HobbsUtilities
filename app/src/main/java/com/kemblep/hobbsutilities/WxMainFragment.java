@@ -17,44 +17,39 @@ import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-import com.kemblep.hobbsutilities.obj.WxReport;
+import com.kemblep.hobbsutilities.obj.sWxReport;
 
 public class WxMainFragment extends Fragment {
 	
-	public static boolean widgetClick = false;
-	private String _stationId = MainActivity.stationId;
+	private String mStationId = MainActivity.StationId;
 	
 	public WxMainFragment() {
-		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.wx_fragment_main, container,
-				false);
-		final View rv = rootView;
-		
-		final Button btnRefresh = (Button) rootView.findViewById(R.id.btn_refresh);
+		final View vWxMainFragment = inflater.inflate(R.layout.wx_fragment_main, container,	false);
+        final Button btnRefresh = (Button) vWxMainFragment.findViewById(R.id.btn_refresh);
+        final Button btnStation = (Button) vWxMainFragment.findViewById(R.id.btn_station);
 
 		btnRefresh.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				PopulateWx(rv);
+				PopulateWx(vWxMainFragment);
 			}
 		});
 		
-		final Button btnStation = (Button) rootView.findViewById(R.id.btn_station);
-		if(_stationId != null){
-			btnStation.setText(_stationId);
+		if(mStationId != null){
+			btnStation.setText(mStationId);
 		}
 		btnStation.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder alert = new AlertDialog.Builder(rv.getContext());
+				AlertDialog.Builder alert = new AlertDialog.Builder(vWxMainFragment.getContext());
 				
 				final EditText input = new EditText(v.getContext());
 				alert.setView(input);
@@ -65,7 +60,7 @@ public class WxMainFragment extends Fragment {
 						if(newStationId.length() == 3 && !Character.isDigit(newStationId.charAt(0))){
                             newStationId = "K" + newStationId;
 						}
-						_stationId = newStationId;
+						mStationId = newStationId;
 						btnStation.setText(newStationId);
 						Activity activity = getActivity();
 						SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
@@ -74,7 +69,7 @@ public class WxMainFragment extends Fragment {
 						edit.commit();
 						
 						Util.updateWx(newStationId);
-						PopulateWx(rv);
+						PopulateWx(vWxMainFragment);
 					}
 				});
 
@@ -88,8 +83,8 @@ public class WxMainFragment extends Fragment {
 				alert.show();
 			}
 		});
-		PopulateWx(rootView);
-		return rootView;
+		PopulateWx(vWxMainFragment);
+		return vWxMainFragment;
 	}
 
 	public void PopulateWx(View v){
@@ -100,7 +95,7 @@ public class WxMainFragment extends Fragment {
 			return;
 		}
 		
-		WxReport wxReport = MainActivity.WeatherReport;
+		sWxReport wxReport = MainActivity.WeatherReport;
 		
 		if(tvMetar != null && tvTaf != null){
 			tvMetar.setText(wxReport.Metar.FormattedMetar);

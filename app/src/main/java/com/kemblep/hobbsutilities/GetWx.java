@@ -5,8 +5,10 @@ import android.util.Log;
 
 import org.w3c.dom.Document;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -31,9 +33,11 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 		URL url;
 		
 		HttpURLConnection huc;
-		try {
-			url = new URL(urlStrings[0]);
-			//Log.d(TAG, "Opening connection to " + url);
+
+        try {
+            url = new URL(urlStrings[0]);
+
+            //Log.d(TAG, "Opening connection to " + url);
 			huc = (HttpURLConnection) url.openConnection();
 			Log.d(TAG, "Getting input stream from " + url);
 			InputStream is = huc.getInputStream();
@@ -42,12 +46,14 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 			//Log.d(TAG, "Done parsing stream from" + url);
             huc.disconnect();
             //Log.d(TAG, "Disconnected from " + url);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return doc;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return doc;
 	}
 
 	private Document parseXML(InputStream inputStream) throws Exception

@@ -30,7 +30,7 @@ import com.kemblep.hobbsutilities.obj.TempArrayAdapter;
 
 public class ExplodingSodaFragment extends Fragment
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private String _sodaStationId = MainActivity.sodaStationId;
+    private String mSodaStationId = MainActivity.SodaStationId;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private final String TAG = ExplodingSodaFragment.class.getName();
@@ -69,8 +69,10 @@ public class ExplodingSodaFragment extends Fragment
 						if(newStationId.length() == 3 && !Character.isDigit(newStationId.charAt(0))){
 							newStationId = "K" + newStationId;
 						}
-						_sodaStationId = newStationId;
-						GetSodaFate(sodaView);
+                        if(newStationId.length() == 4){
+                            mSodaStationId = newStationId;
+                            GetSodaFate(sodaView);
+                        }
 					}
 				});
 
@@ -84,7 +86,7 @@ public class ExplodingSodaFragment extends Fragment
 			}
 		});
 		
-		btnSodaStation.setText(_sodaStationId.toUpperCase());
+		btnSodaStation.setText(mSodaStationId.toUpperCase());
 
         btnLocate.setOnClickListener(new View.OnClickListener() {
 
@@ -114,7 +116,7 @@ public class ExplodingSodaFragment extends Fragment
 
     }
     private void GetSodaFate(View sodaView){
-        StationInfo stationInfo = new StationInfo(_sodaStationId );
+        StationInfo stationInfo = new StationInfo(mSodaStationId);
         Forecast forecast = new Forecast(stationInfo.Latitude, stationInfo.Longitude);
         GetSodaFate(sodaView, forecast);
     }
@@ -137,15 +139,15 @@ public class ExplodingSodaFragment extends Fragment
 
         //tvTemp.setText(result + (char) 0x00B0 + "F");
         Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
-        Util.setText(tvMoreInfo, _sodaStationId.toUpperCase() + " : " + forecast.Description + "\n" + forecast.moreInfoUrl);
+        Util.setText(tvMoreInfo, mSodaStationId.toUpperCase() + " : " + forecast.Description + "\n" + forecast.moreInfoUrl);
 
         Button btnSodaStation = (Button) sodaView.findViewById(R.id.btn_soda_station);
-        btnSodaStation.setText(_sodaStationId);
+        btnSodaStation.setText(mSodaStationId);
 
         Activity activity = getActivity();
         SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPref.edit();
-        edit.putString(getString(R.string.pref_default_soda_station_key), _sodaStationId);
+        edit.putString(getString(R.string.pref_default_soda_station_key), mSodaStationId);
         edit.commit();
 
         Linkify.addLinks(tvMoreInfo, Linkify.ALL);

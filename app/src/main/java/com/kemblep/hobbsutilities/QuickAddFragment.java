@@ -1,9 +1,5 @@
 package com.kemblep.hobbsutilities;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -21,6 +17,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuickAddFragment extends Fragment {
 	
 	public QuickAddFragment() {
@@ -30,36 +30,34 @@ public class QuickAddFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View rootView = inflater.inflate(R.layout.fragment_quick_add, container,
+		View vQuickAddFragment = inflater.inflate(R.layout.fragment_quick_add, container,
 				false);
 		
-		final EditText quickAddEntry = (EditText) rootView.findViewById(R.id.quick_add_entry);
-		final TextView quickAddTotal = (TextView) rootView.findViewById(R.id.quick_add_total);
-		final ListView quickAddTally = (ListView) rootView.findViewById(R.id.quick_add_tally);
+		final EditText etQuickAddEntry = (EditText) vQuickAddFragment.findViewById(R.id.quick_add_entry);
+		final TextView etQuickAddTotal = (TextView) vQuickAddFragment.findViewById(R.id.quick_add_total);
+		final ListView etQuickAddTally = (ListView) vQuickAddFragment.findViewById(R.id.quick_add_tally);
 		
 		final List<String> tally = new ArrayList<String>();
 		final ArrayAdapter<String> tallyAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, tally);
-		
-		
 
-		TextWatcher quickAddWatcher = new TextWatcher() {
+		TextWatcher twQuickAdd = new TextWatcher() {
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if(s.length() == 1){
-					Util.setText(quickAddEntry, s.toString() + ".");
-					quickAddEntry.setSelection(s.length() + 1);
+					Util.setText(etQuickAddEntry, s.toString() + ".");
+					etQuickAddEntry.setSelection(s.length() + 1);
 				}
 				
 				if(s.length() == 3){
 					//send it to the total
 					float addEntry = Float.parseFloat(s.toString());
-					float total = Float.parseFloat(quickAddTotal.getText().toString());
+					float total = Float.parseFloat(etQuickAddTotal.getText().toString());
 					
 					float newTotal = total + addEntry;
 					DecimalFormat finalFormat = new DecimalFormat("0.0");
 
-					Util.setText(quickAddTotal, finalFormat.format(newTotal));
+					Util.setText(etQuickAddTotal, finalFormat.format(newTotal));
 					
 					String tallyAddition = finalFormat.format(addEntry);
 					tally.add(0, tallyAddition);
@@ -68,9 +66,9 @@ public class QuickAddFragment extends Fragment {
 				if(s.length() > 3){
 					
 					//clear and set focus of the entry
-					quickAddEntry.setText(s.toString().substring(3));
-					quickAddEntry.requestFocus();
-					quickAddEntry.setSelection(2);
+					etQuickAddEntry.setText(s.toString().substring(3));
+					etQuickAddEntry.requestFocus();
+					etQuickAddEntry.setSelection(2);
 				}
 			}
 			
@@ -88,16 +86,16 @@ public class QuickAddFragment extends Fragment {
 			}
 		};
 		
-		quickAddEntry.addTextChangedListener(quickAddWatcher);
+		etQuickAddEntry.addTextChangedListener(twQuickAdd);
 		
-		Button quickAddReset = (Button) rootView.findViewById(R.id.quick_add_reset);
-		OnClickListener quickAddResetClick = new OnClickListener() {
+		Button btnQuickAddReset = (Button) vQuickAddFragment.findViewById(R.id.quick_add_reset);
+		OnClickListener btnQuickAddResetOnClickListener = new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Util.setText(quickAddEntry, "");
-				if(quickAddTotal.getText().toString() != "0.0"){
-					Util.setText(quickAddTotal, "0.0");
+				Util.setText(etQuickAddEntry, "");
+				if(etQuickAddTotal.getText().toString() != "0.0"){
+					Util.setText(etQuickAddTotal, "0.0");
 					if(!tally.isEmpty()){ 
 						Toast.makeText(getActivity(), "Click again to clear the tally", Toast.LENGTH_SHORT).show();
 					}
@@ -109,23 +107,23 @@ public class QuickAddFragment extends Fragment {
 			}
 		};
 		
-		quickAddReset.setOnClickListener(quickAddResetClick);
+		btnQuickAddReset.setOnClickListener(btnQuickAddResetOnClickListener);
 		
-		OnItemClickListener quickAddTallyItemClick = new OnItemClickListener() {
+		OnItemClickListener etQuickAddTallyOnClickListener = new OnItemClickListener() {
 			
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				Util.setText(quickAddEntry, "");
+				Util.setText(etQuickAddEntry, "");
 				
-				float clickedTime = Float.parseFloat(quickAddTally.getItemAtPosition(position).toString());
-				float total = Float.parseFloat(quickAddTotal.getText().toString());
+				float clickedTime = Float.parseFloat(etQuickAddTally.getItemAtPosition(position).toString());
+				float total = Float.parseFloat(etQuickAddTotal.getText().toString());
 				
 				float newTotal = total - clickedTime;
 				DecimalFormat finalFormat = new DecimalFormat("0.0");
 
-				Util.setText(quickAddTotal, finalFormat.format(newTotal));
+				Util.setText(etQuickAddTotal, finalFormat.format(newTotal));
 				
 				tally.remove(position);
 				tallyAdapter.notifyDataSetChanged();
@@ -133,9 +131,9 @@ public class QuickAddFragment extends Fragment {
 			}
 		};
 		
-		quickAddTally.setAdapter(tallyAdapter);
-		quickAddTally.setOnItemClickListener(quickAddTallyItemClick);
+		etQuickAddTally.setAdapter(tallyAdapter);
+		etQuickAddTally.setOnItemClickListener(etQuickAddTallyOnClickListener);
 		
-		return rootView;
+		return vQuickAddFragment;
 	}
 }

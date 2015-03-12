@@ -35,7 +35,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/times_result"
-	        android:hint="@string/start_time_help"
+	        android:hint="@string/block_out_time_hint"
 	        android:inputType="number" />
 	    
 	    <EditText
@@ -44,7 +44,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/start_time_entry"
-	        android:hint="@string/end_time_help"
+	        android:hint="@string/block_in_time_hint"
 	        android:inputType="number" />	        
 
 	    <Button

@@ -23,7 +23,7 @@ public class Forecast {
 	private String _noData;
 	private String _descriptionTextField = Strings.DescriptionTextField;
 	private String _temperatureTextField = Strings.TemperatureTextfield;
-	private String _values = WxReport.ValueTextField;
+	private String _values = sWxReport.ValueTextField;
     public Bitmap MapForecastLocation;
     public TimeTempMap FCTimeTempMap = new TimeTempMap();
 

@@ -14,20 +14,19 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.kemblep.hobbsutilities.obj.WxReport;
+import com.kemblep.hobbsutilities.obj.sWxReport;
 
 import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity {
 
 	private static final String ARG_SECTION_NUMBER = "section_number";
-	private static String I_COME_FROM_THE_WIDGET = "WxWidgetClick";
-	public static String stationId = null;
-	public static String sodaStationId = null;
-	public static WxReport WeatherReport;
+    public static String StationId = null;
+	public static String SodaStationId = null;
+	public static sWxReport WeatherReport;
 
-	SectionsPagerAdapter mSectionsPagerAdapter;
-	ViewPager mViewPager;
+	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private ViewPager mViewPager;
 
 //
 //    /**
@@ -48,13 +47,13 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 
 		SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-		stationId = sharedPref.getString(getString(R.string.pref_default_station_key), "KBED");
-        if(stationId.isEmpty()){
-            stationId = "KBED";
+		StationId = sharedPref.getString(getString(R.string.pref_default_station_key), "KBED");
+        if(StationId.isEmpty()){
+            StationId = "KBED";
         }
-		sodaStationId = sharedPref.getString(getString(R.string.pref_default_soda_station_key), "KBED");
-        if(sodaStationId.isEmpty()){
-            sodaStationId = "KBED";
+		SodaStationId = sharedPref.getString(getString(R.string.pref_default_soda_station_key), "KBED");
+        if(SodaStationId.isEmpty()){
+            SodaStationId = "KBED";
         }
 
         //ActionBar toolbar = getSupportActionBar();
@@ -104,11 +103,12 @@ public class MainActivity extends ActionBarActivity {
 		mViewPager.setOffscreenPageLimit(3);
 
 		//get the weather
-		WeatherReport = new WxReport(stationId);
+		WeatherReport = new sWxReport(StationId);
 
 		//set the wx tab if needed
 		Intent intent = getIntent();
-		if(intent.getAction().equals(I_COME_FROM_THE_WIDGET)){
+        String widgetClick = "WxWidgetClick";
+        if(intent.getAction().equals(widgetClick)){
 			mViewPager.setCurrentItem(2);
 		}
 	}

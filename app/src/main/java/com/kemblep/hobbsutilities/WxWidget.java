@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
-import com.kemblep.hobbsutilities.obj.WxReport;
+import com.kemblep.hobbsutilities.obj.sWxReport;
 
 public class WxWidget extends AppWidgetProvider {
 	
@@ -25,9 +25,9 @@ public class WxWidget extends AppWidgetProvider {
 		SharedPreferences sharedPref = context.getSharedPreferences("MainActivity", context.MODE_PRIVATE);
 		String stationId = sharedPref.getString(context.getString(R.string.pref_default_station_key), "KBED");
 		
-		WxReport wxReport;
+		sWxReport wxReport;
 		if(MainActivity.WeatherReport == null){
-			wxReport = new WxReport(stationId);
+			wxReport = new sWxReport(stationId);
 		} else {	
 			wxReport = MainActivity.WeatherReport;
 		}

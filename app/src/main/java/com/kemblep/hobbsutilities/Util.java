@@ -1,16 +1,16 @@
 package com.kemblep.hobbsutilities;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
-import com.kemblep.hobbsutilities.obj.WxReport;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.kemblep.hobbsutilities.obj.sWxReport;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Util {
 	
@@ -43,7 +43,7 @@ public class Util {
 		}
 
 	public static void updateWx(String newStationId) {
-		MainActivity.WeatherReport = new WxReport(newStationId);
+		MainActivity.WeatherReport = new sWxReport(newStationId);
 	}
 
 	public static String getZuluTime() {

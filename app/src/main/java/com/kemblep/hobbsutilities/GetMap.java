@@ -5,8 +5,10 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -35,9 +37,11 @@ public class GetMap extends AsyncTask<String, Void, Bitmap> {
             //Log.d(TAG, "Done parsing stream from" + url);
             huc.disconnect();
             //Log.d(TAG, "Disconnected from " + url);
-
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return bmp;
