@@ -86,8 +86,6 @@ public class ExplodingSodaFragment extends Fragment
 			}
 		});
 		
-		btnSodaStation.setText(mSodaStationId.toUpperCase());
-
         btnLocate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -139,10 +137,7 @@ public class ExplodingSodaFragment extends Fragment
 
         //tvTemp.setText(result + (char) 0x00B0 + "F");
         Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
-        Util.setText(tvMoreInfo, mSodaStationId.toUpperCase() + " : " + forecast.Description + "\n" + forecast.moreInfoUrl);
-
-        Button btnSodaStation = (Button) sodaView.findViewById(R.id.btn_soda_station);
-        btnSodaStation.setText(mSodaStationId);
+        Util.setText(tvMoreInfo, forecast.Description + "\n" + forecast.MoreInfoUrl);
 
         Activity activity = getActivity();
         SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);

@@ -18,4 +18,12 @@ public class Strings {
     public static String SiteNameField = "site";
     public static String DescriptionTextField = "area-description";
     public static String TemperatureTextfield = "temperature";
+    public static String DataTextField = "data";
+    public static String MoreWeatherInformationTextField = "moreWeatherInformation";
+    public static String PathMoreWeatherInformation = "/dwml/data[1]/moreWeatherInformation/text()";
+    public static String PathDescription = "/dwml/data/location/area-description/text()";
+    public static String PathMinsLayoutKey = "/dwml/data/parameters/temperature[@type='minimum']/@time-layout";
+    public static String PathMinimumTemps = "/dwml/data[1]/parameters/temperature[@type='minimum']/*";
+    public static String PathTimePeriods = "/dwml/data[1]/time-layout/layout-key[text()='<LAYOUT-KEY>']/../*";
+    public static String PathTimePeriodNames = "/dwml/data[1]/time-layout/start-valid-time[@period-name]";
 }

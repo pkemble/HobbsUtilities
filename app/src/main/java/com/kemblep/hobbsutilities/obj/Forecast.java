@@ -1,6 +1,7 @@
 package com.kemblep.hobbsutilities.obj;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.kemblep.hobbsutilities.GetMap;
 import com.kemblep.hobbsutilities.GetWx;
@@ -15,15 +16,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 public class Forecast {
-	private String mForecastUrl = Strings.ForecastUrl;
+
+    private String mForecastUrl = Strings.ForecastUrl;
     private String mMapUrl = Strings.GoogleMapUrl;
 	public String Description;
-	public String moreInfoUrl;
+	public String MoreInfoUrl;
 	private String mNoData;
 	private String mDescriptionTextField = Strings.DescriptionTextField;
 	private String mTemperatureTextField = Strings.TemperatureTextfield;
+    private String mDataTextField = Strings.DataTextField;
 	private String mValues = WxReport.ValueTextField;
+    private String mMoreWeatherInformation = Strings.MoreWeatherInformationTextField;
     public Bitmap MapForecastLocation;
     public TimeTempMap FCTimeTempMap = new TimeTempMap();
 
@@ -40,6 +50,8 @@ public class Forecast {
         public int Temperature;
     }
 
+    private static String TAG = Forecast.class.getName();
+
     public Forecast(String latitude, String longitude){
 		mNoData = "No forecast :(";
 		//TODO: serialize all the node names
@@ -50,91 +62,54 @@ public class Forecast {
 			mForecastUrl = mForecastUrl.replace("<LATITUDE>", latitude).replace("<LONGITUDE>", longitude);
 			doc = new GetWx().execute(mForecastUrl).get();
 			if(doc != null){
-				NodeList data = doc.getElementsByTagName("data");
-				for (int i = 0; i < data.getLength(); i++){
-					if(getNodeAttributeValue(data.item(i), "type").equalsIgnoreCase("forecast")){
-						//get a list of periods
-						NodeList timeLayouts = data.item(i).getChildNodes();
-						for (int j = 0; j < timeLayouts.getLength(); j++){
-							//populate more info
-							if(timeLayouts.item(j).getNodeName().equalsIgnoreCase("moreWeatherInformation")){
-								moreInfoUrl = timeLayouts.item(j).getTextContent();
-							}
-							
-//							<parameters applicable-location="point1">
-//								<temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-1">
-//									<name>Daily Minimum Temperature</name>
-//									<value>10</value>
-//									<value>9</value>...
-							
-							if(timeLayouts.item(j).getNodeName().equalsIgnoreCase("parameters")){
-								NodeList tempTypeNodes = timeLayouts.item(j).getChildNodes();
-								for(int q=0; q < tempTypeNodes.getLength(); q++){
-									String tt = getNodeAttributeValue(tempTypeNodes.item(q), "type");
-									if(tt != null && tt.equalsIgnoreCase("minimum")){		
-										//grab the text from the layout-key node
-										FCTimeTempMap.LayoutKey = getNodeAttributeValue(tempTypeNodes.item(q), "time-layout");
-										//get the minimums
-										NodeList valueMins = tempTypeNodes.item(q).getChildNodes();
-										for (int k = 0; k < valueMins.getLength(); k++){
-											if(valueMins.item(k).getNodeName().equalsIgnoreCase("value")){
-                                                TimePeriod timePeriod = new TimePeriod();
-											    timePeriod.Temperature = Integer.parseInt(valueMins.item(k).getTextContent());
-                                                FCTimeTempMap.TimePeriods.add(timePeriod);
-											} else if(valueMins.item(k).getNodeName().equalsIgnoreCase("name")) {
-                                                FCTimeTempMap.Name = valueMins.item(k).getTextContent();
-                                            }
-										}
-									}
-									
-								}
-								
-							}
-							//look through each parameters node and find the daily minimums one
-						}
-						//match the time-layout node with the layout key
-						for (int l = 0; l < timeLayouts.getLength(); l++){
-							//get the time period for the minimums
-							NodeList periodList = timeLayouts.item(l).getChildNodes();
-                            int z = 0;
-							for (int m = 0; m < periodList.getLength(); m++){
-								if(periodList.item(m).getNodeName().equalsIgnoreCase("layout-key") && periodList.item(m).getTextContent().equalsIgnoreCase(FCTimeTempMap.LayoutKey)){
-									for (int n = 0; n < periodList.getLength(); n++){
-                                        String pn = getNodeAttributeValue(periodList.item(n), "period-name");
-                                        if(pn != null) {
-                                            String pt = periodList.item(n).getTextContent();
-                                            FCTimeTempMap.TimePeriods.get(z).PeriodName = pn;
-                                            z++;
-                                        }
-									}
-								}
-							}
-						}
-					}
-				}
-				
-				if(data.getLength() > 0){
-					Node descNode = doc.getElementsByTagName(mDescriptionTextField).item(0);
-					if(descNode != null) Description = descNode.getTextContent();
-				}
+                Log.d(TAG, "Beginning forecast generation from Document");
+
+                XPathFactory xPathFactory = XPathFactory.newInstance();
+                XPath xPath = xPathFactory.newXPath();
+
+                //get the more information link from the forecast data node
+                XPathExpression exprMoreWeatherInformation = xPath.compile(Strings.PathMoreWeatherInformation);
+                MoreInfoUrl = (String) exprMoreWeatherInformation.evaluate(doc, XPathConstants.STRING);
+
+                //get the description
+                XPathExpression exprDescription = xPath.compile(Strings.PathDescription);
+                Description = (String) exprDescription.evaluate(doc, XPathConstants.STRING);
+
+                //get the layout key for the minimums
+                XPathExpression exprMinsLayoutKey = xPath.compile(Strings.PathMinsLayoutKey);
+                FCTimeTempMap.LayoutKey = (String) exprMinsLayoutKey.evaluate(doc, XPathConstants.STRING);
+
+                XPathExpression exprMinimumTemps = xPath.compile(Strings.PathMinimumTemps);
+                NodeList nlMinTemps = (NodeList) exprMinimumTemps.evaluate(doc, XPathConstants.NODESET);
+
+                for (int k = 0; k < nlMinTemps.getLength(); k++){
+                    if(nlMinTemps.item(k).getNodeName().equalsIgnoreCase("value")){
+                        TimePeriod timePeriod = new TimePeriod();
+                        timePeriod.Temperature = Integer.parseInt(nlMinTemps.item(k).getTextContent());
+                        FCTimeTempMap.TimePeriods.add(timePeriod);
+                    } else if(nlMinTemps.item(k).getNodeName().equalsIgnoreCase("name")) {
+                        FCTimeTempMap.Name = nlMinTemps.item(k).getTextContent();
+                    }
+                }
+
+                XPathExpression exprTimePeriods = xPath.compile(Strings.PathTimePeriods.replace("<LAYOUT-KEY>", FCTimeTempMap.LayoutKey));
+                NodeList nlTimePeriods = (NodeList) exprTimePeriods.evaluate(doc, XPathConstants.NODESET);
+                int z = 0;
+                for (int n = 0; n < nlTimePeriods.getLength(); n++){
+                    String pn = getNodeAttributeValue(nlTimePeriods.item(n), "period-name");
+                    if(pn != null) {
+                        String pt = nlTimePeriods.item(n).getTextContent();
+                        FCTimeTempMap.TimePeriods.get(z).PeriodName = pn;
+                        z++;
+                    }
+                }
 			}
-		} 
-		catch (InterruptedException | ExecutionException e) {
+            Log.d(TAG, "Finished parsing Document for " + this.Description);
+		} catch (InterruptedException | ExecutionException | XPathExpressionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-	}
-
-    private Node getNodeByAttributeValue(NodeList nodeList, String nodeAttribute, String nodeAttributeValue){
-		for (int i = 0; i < nodeList.getLength(); i++){
-			if(nodeList.item(i).hasAttributes() && getNodeAttributeValue(nodeList.item(i), nodeAttribute).equalsIgnoreCase(nodeAttributeValue)){
-				nodeList.item(i).setNodeValue("frist");
-				return nodeList.item(i);
-			}
-		}
-		return null;
-		
-	}
+        }
+    }
 
 	private String getNodeAttributeValue(Node node, String nodeAttribute) {
 			NamedNodeMap map = node.getAttributes();
