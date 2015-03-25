@@ -19,7 +19,7 @@
     
     <!-- wx strings -->
     <string name="loading">Nothing yet...</string>
-    <string name="airplane_mode">You\'re in airplane mode - unable to get weather!</string>
+    <string name="airplane_mode">Unable to get the weather. A network connection might not be present.</string>
 	<string name="pref_default_station">Default Station</string>
 	<string name="pref_default_station_key">station</string>
 	<string name="pref_default_soda_station_key">soda_station</string>

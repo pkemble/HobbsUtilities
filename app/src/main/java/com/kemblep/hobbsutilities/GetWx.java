@@ -36,10 +36,10 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 
         try {
             url = new URL(urlStrings[0]);
-
             //Log.d(TAG, "Opening connection to " + url);
-			huc = (HttpURLConnection) url.openConnection();
-			Log.d(TAG, "Getting input stream from " + url);
+            huc = (HttpURLConnection) url.openConnection();
+            huc.setConnectTimeout(5000);
+            Log.d(TAG, "Getting input stream from " + url);
 			InputStream is = huc.getInputStream();
 			Log.d(TAG, "Input stream received from " + url);
 			doc = parseXML(is);

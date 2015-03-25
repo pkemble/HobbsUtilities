@@ -40,16 +40,16 @@ xmlns:tools="http://schemas.android.com/tools"
     <Button
         android:id="@+id/btn_soda_station"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/tv_more_info"
         android:layout_marginRight="10sp"
         android:text="@string/btn_station"/>
 
     <Button
         android:id="@+id/btn_locate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/location32"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/location32"
         android:layout_toRightOf="@+id/btn_soda_station"
         android:layout_alignBottom="@+id/btn_soda_station"/>
 

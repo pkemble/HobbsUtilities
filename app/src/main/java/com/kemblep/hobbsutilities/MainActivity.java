@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -103,9 +104,15 @@ public class MainActivity extends ActionBarActivity {
 		mViewPager.setOffscreenPageLimit(3);
 
 		//get the weather
-		WeatherReport = new WxReport(StationId);
+        try {
+            if(!Util.isAirplaneModeOn(getApplicationContext())) {
+                WeatherReport = new WxReport(StationId);
+            }
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
 
-		//set the wx tab if needed
+        //set the wx tab if needed
 		Intent intent = getIntent();
         String widgetClick = "WxWidgetClick";
         if(intent.getAction().equals(widgetClick)){

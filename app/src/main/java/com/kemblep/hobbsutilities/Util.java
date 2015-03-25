@@ -35,10 +35,10 @@ public class Util {
 		e.setText(null);
 	}
 	
-	public static boolean isAirplaneModeOn(Context context) {
+	public static boolean isAirplaneModeOn(Context context) throws Settings.SettingNotFoundException {
 
 		   return Settings.Global.getInt(context.getContentResolver(),
-		           Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
+		           Settings.Global.AIRPLANE_MODE_ON) != 0;
 
 		}
 

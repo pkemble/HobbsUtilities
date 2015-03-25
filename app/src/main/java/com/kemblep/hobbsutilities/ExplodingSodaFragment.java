@@ -115,37 +115,46 @@ public class ExplodingSodaFragment extends Fragment
     }
     private void GetSodaFate(View sodaView){
         StationInfo stationInfo = new StationInfo(mSodaStationId);
-        Forecast forecast = new Forecast(stationInfo.Latitude, stationInfo.Longitude);
+        Forecast forecast = null;
+        if(stationInfo.Latitude != null && stationInfo.Longitude != null){
+            forecast = new Forecast(stationInfo.Latitude, stationInfo.Longitude);
+        }
         GetSodaFate(sodaView, forecast);
     }
 
     private void GetSodaFate(View sodaView, Forecast forecast) {
 
         ImageView ivMap = (ImageView) sodaView.findViewById(R.id.img_map);
-        if(ivMap != null && forecast.MapForecastLocation != null){
+        if(ivMap != null && forecast != null && forecast.MapForecastLocation != null){
             ivMap.setImageBitmap(forecast.MapForecastLocation);
-        }
-        if(!forecast.FCTimeTempMap.TimePeriods.isEmpty()){
-            TempArrayAdapter tempArrayAdapter = new TempArrayAdapter(sodaView.getContext(), forecast);
-
-            ListView lvForecast = (ListView) sodaView.findViewById(R.id.lv_forecast);
-            lvForecast.setAdapter(tempArrayAdapter);
         }
 
         TextView tvSodaTime = (TextView) sodaView.findViewById(R.id.tv_soda_time);
         TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info);
 
-        //tvTemp.setText(result + (char) 0x00B0 + "F");
-        Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
-        Util.setText(tvMoreInfo, forecast.Description + "\n" + forecast.MoreInfoUrl);
+        if(forecast == null){
+            Util.setText(tvSodaTime, "No weather available. Check your network connection.");
+        } else {
 
-        Activity activity = getActivity();
-        SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPref.edit();
-        edit.putString(getString(R.string.pref_default_soda_station_key), mSodaStationId);
-        edit.commit();
+            if (!forecast.FCTimeTempMap.TimePeriods.isEmpty()) {
+                TempArrayAdapter tempArrayAdapter = new TempArrayAdapter(sodaView.getContext(), forecast);
 
-        Linkify.addLinks(tvMoreInfo, Linkify.ALL);
+                ListView lvForecast = (ListView) sodaView.findViewById(R.id.lv_forecast);
+                lvForecast.setAdapter(tempArrayAdapter);
+            }
+
+            //tvTemp.setText(result + (char) 0x00B0 + "F");
+            Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
+            Util.setText(tvMoreInfo, forecast.Description + "\n" + forecast.MoreInfoUrl);
+        }
+            Activity activity = getActivity();
+            SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
+            SharedPreferences.Editor edit = sharedPref.edit();
+            edit.putString(getString(R.string.pref_default_soda_station_key), mSodaStationId);
+            edit.commit();
+
+            Linkify.addLinks(tvMoreInfo, Linkify.ALL);
+
 
     }
 

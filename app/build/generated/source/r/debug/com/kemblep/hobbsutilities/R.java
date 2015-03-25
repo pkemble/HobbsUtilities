@@ -2010,18 +2010,18 @@ containing a value of this type.
         public static final int Base_ThemeOverlay_AppCompat_Dark=0x7f0d0037;
         public static final int Base_ThemeOverlay_AppCompat_Dark_ActionBar=0x7f0d0038;
         public static final int Base_ThemeOverlay_AppCompat_Light=0x7f0d0039;
-        public static final int Base_V11_Theme_AppCompat=0x7f0d00e8;
-        public static final int Base_V11_Theme_AppCompat_Dialog=0x7f0d00e9;
-        public static final int Base_V11_Theme_AppCompat_Light=0x7f0d00ea;
-        public static final int Base_V11_Theme_AppCompat_Light_Dialog=0x7f0d00eb;
-        public static final int Base_V14_Theme_AppCompat=0x7f0d00ec;
-        public static final int Base_V14_Theme_AppCompat_Dialog=0x7f0d00ed;
-        public static final int Base_V14_Theme_AppCompat_Light=0x7f0d00ee;
-        public static final int Base_V14_Theme_AppCompat_Light_Dialog=0x7f0d00ef;
-        public static final int Base_V21_Theme_AppCompat=0x7f0d00f0;
-        public static final int Base_V21_Theme_AppCompat_Dialog=0x7f0d00f1;
-        public static final int Base_V21_Theme_AppCompat_Light=0x7f0d00f2;
-        public static final int Base_V21_Theme_AppCompat_Light_Dialog=0x7f0d00f3;
+        public static final int Base_V11_Theme_AppCompat=0x7f0d00e9;
+        public static final int Base_V11_Theme_AppCompat_Dialog=0x7f0d00ea;
+        public static final int Base_V11_Theme_AppCompat_Light=0x7f0d00eb;
+        public static final int Base_V11_Theme_AppCompat_Light_Dialog=0x7f0d00ec;
+        public static final int Base_V14_Theme_AppCompat=0x7f0d00ed;
+        public static final int Base_V14_Theme_AppCompat_Dialog=0x7f0d00ee;
+        public static final int Base_V14_Theme_AppCompat_Light=0x7f0d00ef;
+        public static final int Base_V14_Theme_AppCompat_Light_Dialog=0x7f0d00f0;
+        public static final int Base_V21_Theme_AppCompat=0x7f0d00f1;
+        public static final int Base_V21_Theme_AppCompat_Dialog=0x7f0d00f2;
+        public static final int Base_V21_Theme_AppCompat_Light=0x7f0d00f3;
+        public static final int Base_V21_Theme_AppCompat_Light_Dialog=0x7f0d00f4;
         public static final int Base_V7_Theme_AppCompat=0x7f0d003a;
         public static final int Base_V7_Theme_AppCompat_Dialog=0x7f0d003b;
         public static final int Base_V7_Theme_AppCompat_Light=0x7f0d003c;
@@ -2195,7 +2195,8 @@ containing a value of this type.
         public static final int Widget_AppCompat_Toolbar=0x7f0d00e4;
         public static final int Widget_AppCompat_Toolbar_Button_Navigation=0x7f0d00e5;
         public static final int myActionBarStyle=0x7f0d00e6;
-        public static final int myPagerStyle=0x7f0d00e7;
+        public static final int myButtonStyle=0x7f0d00e7;
+        public static final int myPagerStyle=0x7f0d00e8;
     }
     public static final class xml {
         public static final int preferences=0x7f050000;

@@ -38,6 +38,7 @@ public class WxMainFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
+                Util.updateWx(MainActivity.StationId);
 				PopulateWx(vWxMainFragment);
 			}
 		});
@@ -90,9 +91,13 @@ public class WxMainFragment extends Fragment {
 	public void PopulateWx(View v){
 		TextView tvMetar = (TextView) v.findViewById(R.id.tv_metar);
 		TextView tvTaf = (TextView) v.findViewById(R.id.tv_taf);
-		if(Util.isAirplaneModeOn(getActivity())){
-			Util.setText(tvMetar, getString(R.string.airplane_mode));
-			return;
+		if(MainActivity.WeatherReport == null){
+            //try to update it
+            MainActivity.WeatherReport = new WxReport(MainActivity.StationId);
+            if(MainActivity.WeatherReport == null){
+                Util.setText(tvMetar, getString(R.string.airplane_mode));
+                return;
+            }
 		}
 		
 		WxReport wxReport = MainActivity.WeatherReport;
