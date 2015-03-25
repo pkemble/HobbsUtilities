@@ -17,7 +17,6 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -51,9 +50,9 @@ public class HoursConversionFragment extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				//if the start time has been entered, focus on the end time
 				//unless it's also already been entered
-				if(s.length() >= 4 && !verifyTimes(etBlockOut, etBlockIn)){
+				if(s.length() >= 4 && !Util.verifyTimes(etBlockOut, etBlockIn)){
 					if(s.length() > 4){
-						fixErrors(etBlockOut);
+						Util.fixErrors(etBlockOut);
 					}
 					return;
 				}
@@ -84,10 +83,10 @@ public class HoursConversionFragment extends Fragment {
 
             @Override
 			public void onTextChanged(CharSequence end, int start, int before, int count) {
-				if(end.length() >= 4 && !verifyTimes(etBlockOut, etBlockIn)){
+				if(end.length() >= 4 && !Util.verifyTimes(etBlockOut, etBlockIn)){
 					//nullify any further input
 					if(end.length() > 4){
-						fixErrors(etBlockIn);
+						Util.fixErrors(etBlockIn);
 					}
 					return;
 				}
@@ -163,43 +162,10 @@ public class HoursConversionFragment extends Fragment {
 		return vHoursConversion;
 	}
 	
-	public void resetTimes(EditText etBlockIn, EditText etBlockOut){
+	private void resetTimes(EditText etBlockIn, EditText etBlockOut){
 		Util.resetEditText(etBlockIn);
 		Util.resetEditText(etBlockOut);
 		etBlockIn.requestFocus();
-	}
-
-	private boolean verifyTimes(EditText startTimeEntry, EditText endTimeEntry){
-		//verify good dates, despite 2500 being interpreted as 0100
-		String t1 = "0000", t2 = "0000";
-		
-		if(startTimeEntry.getText().length() > 0){
-			t1 = startTimeEntry.getText().toString();
-		}
-		if(endTimeEntry.getText().length() > 0){
-			t2 = endTimeEntry.getText().toString();
-		}
-		
-		int t1h = Integer.parseInt(t1.substring(0, 2));
-		int t1m = Integer.parseInt(t1.substring(2, 4));
-		int t2h = Integer.parseInt(t2.substring(0, 2));
-		int t2m = Integer.parseInt(t2.substring(2, 4));
-		
-		if(t1h > 23 | t1m > 59){
-			startTimeEntry.setBackgroundColor(Color.RED);
-			return false;
-		} else {
-			startTimeEntry.setBackgroundColor(Color.TRANSPARENT);
-		}
-		
-		if(t2h > 23 | t2m > 59){
-			endTimeEntry.setBackgroundColor(Color.RED);
-			return false;
-		} else {
-			startTimeEntry.setBackgroundColor(Color.TRANSPARENT);
-		}
-		//everything is good
-		return true;
 	}
 	
 	private void convertTimes(EditText etBlockIn, EditText etBlockOut) {
@@ -211,20 +177,15 @@ public class HoursConversionFragment extends Fragment {
 		
 		try {
 			
-			if(!verifyTimes(etBlockIn, etBlockOut)){
+			if(!Util.verifyTimes(etBlockIn, etBlockOut)){
 				return;
 			}
 			
 			Date start = sdf.parse(etBlockIn.getText().toString());
 			Date end = sdf.parse(etBlockOut.getText().toString());
 			
-			if(start.after(end)){
-				Calendar c = Calendar.getInstance();
-				c.setTime(end);
-				c.add(Calendar.DATE, 1);
-				end = c.getTime();
-			}
-												
+            end = Util.fixEndTime(start, end);
+
 			DecimalFormat preciseFormat = new DecimalFormat("0.##");
 			DecimalFormat finalFormat = new DecimalFormat("0.0");
 
@@ -254,10 +215,5 @@ public class HoursConversionFragment extends Fragment {
 		}
 	}
 
-	private void fixErrors(EditText e){
-		Util.setText(e, e.getText().toString().substring(4));
-		e.setBackgroundColor(Color.TRANSPARENT);
-		e.setSelection(1);
-	}
 }
 

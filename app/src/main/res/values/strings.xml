@@ -3,6 +3,7 @@
 
     <string name="app_name">Hobbs Utilities</string>
     <string name="title_convert">Convert Block to Hobbs</string>
+    <string name="title_duty">Duty Calculator</string>
     <string name="title_quick_add">Quick Add Hobbs</string>
     <string name="title_wx">TAF &amp; METAR</string>
     <string name="title_soda">Overnight Temps</string>
@@ -29,4 +30,7 @@
 	<string name="taf_raw_text_field">raw_text</string>
 	<string name="station_entry_title">Enter an ICAO station identifier:</string>
 
+    <!-- 10in24 strings -->
+    <string name="duty_calculator_intro">duty calculator intro</string>
+    <string name="duty_times_blurb">Duty periods starting from 24 hours ago:</string>
 </resources>

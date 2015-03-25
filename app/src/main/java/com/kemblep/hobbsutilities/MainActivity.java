@@ -86,16 +86,22 @@ public class MainActivity extends ActionBarActivity {
                         }
 
                         if(position == 1){
-                            EditText e = (EditText) findViewById(R.id.quick_add_entry);
+                            EditText e = (EditText) findViewById(R.id.et_duty_block_start);
                             if(e != null) e.requestFocus();
                             imm.showSoftInput(e, 0);
                         }
 
                         if(position == 2){
-                            imm.hideSoftInputFromWindow(findViewById(R.id.tv_metar).getWindowToken(), 0);
+                            EditText e = (EditText) findViewById(R.id.quick_add_entry);
+                            if(e != null) e.requestFocus();
+                            imm.showSoftInput(e, 0);
                         }
 
                         if(position == 3){
+                            imm.hideSoftInputFromWindow(findViewById(R.id.tv_metar).getWindowToken(), 0);
+                        }
+
+                        if(position == 4){
                             imm.hideSoftInputFromWindow(findViewById(R.id.lv_forecast).getWindowToken(), 0);
                         }
 					}
@@ -116,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 		Intent intent = getIntent();
         String widgetClick = "WxWidgetClick";
         if(intent.getAction().equals(widgetClick)){
-			mViewPager.setCurrentItem(2);
+			mViewPager.setCurrentItem(3);
 		}
 	}
 
@@ -159,26 +165,32 @@ public class MainActivity extends ActionBarActivity {
 				args.putInt(ARG_SECTION_NUMBER, position + 1);
 				hoursConvFragment.setArguments(args);
 				return hoursConvFragment;
-				
-			case 1:
-				Fragment quickAddFragment = new QuickAddFragment();
-				Bundle args1 = new Bundle();
-				args1.putInt(ARG_SECTION_NUMBER, position + 1);
-				quickAddFragment.setArguments(args1);
-				return quickAddFragment;
-				
+
+            case 1:
+                Fragment dutyTimeCalculator = new DutyTimeCalculator();
+                Bundle args1 = new Bundle();
+                args1.putInt(ARG_SECTION_NUMBER, position + 1);
+                dutyTimeCalculator.setArguments(args1);
+                return dutyTimeCalculator;
 			case 2:
-				Fragment wxMainFragment = new WxMainFragment();
+				Fragment quickAddFragment = new QuickAddFragment();
 				Bundle args2 = new Bundle();
 				args2.putInt(ARG_SECTION_NUMBER, position + 1);
-				wxMainFragment.setArguments(args2);
-				return wxMainFragment;
+				quickAddFragment.setArguments(args2);
+				return quickAddFragment;
 				
 			case 3:
-				Fragment explodingSodaFragment = new ExplodingSodaFragment();
+				Fragment wxMainFragment = new WxMainFragment();
 				Bundle args3 = new Bundle();
 				args3.putInt(ARG_SECTION_NUMBER, position + 1);
-				explodingSodaFragment.setArguments(args3);
+				wxMainFragment.setArguments(args3);
+				return wxMainFragment;
+				
+			case 4:
+				Fragment explodingSodaFragment = new ExplodingSodaFragment();
+				Bundle args4 = new Bundle();
+				args4.putInt(ARG_SECTION_NUMBER, position + 1);
+				explodingSodaFragment.setArguments(args4);
 				return explodingSodaFragment;
 				
 			default:
@@ -198,11 +210,13 @@ public class MainActivity extends ActionBarActivity {
 			switch (position) {
 			case 0:
 				return getString(R.string.title_convert).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_quick_add).toUpperCase(l);
+            case 1:
+                return getString(R.string.title_duty).toUpperCase(l);
 			case 2:
-				return getString(R.string.title_wx).toUpperCase(l);
+				return getString(R.string.title_quick_add).toUpperCase(l);
 			case 3:
+				return getString(R.string.title_wx).toUpperCase(l);
+			case 4:
 				return getString(R.string.title_soda).toUpperCase(l);
 			}
 			return null;
