@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kemblep.hobbsutilities.obj.DutyTimeArrayAdapter;
+import com.kemblep.hobbsutilities.obj.HobbsTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +29,7 @@ public class DutyTimeCalculator extends Fragment {
     public DutyTimeCalculator(){
     }
 
-    private int mTotalDutyDateTime;
+    private float mTotalDutyDateTime;
     private ArrayList<String> mDutyPeriods = new ArrayList<>();
 
     @Override
@@ -171,21 +172,15 @@ public class DutyTimeCalculator extends Fragment {
             if(blockOut.before(twentyFourAgo)){
                 blockOut = twentyFourAgo;
             }
+        //make a hobbstime object
+            HobbsTime dutyTime = new HobbsTime(blockOut, blockIn);
 
-        //fix the blockIn time if needed
-            blockIn = Util.fixEndTime(blockOut, blockIn);
-
-        //get the timespan from start to end
-            long totalMillis = blockIn.getTime() - blockOut.getTime();
-
-        //add the timespan to the total duty time
-            mTotalDutyDateTime += totalMillis;
         //display the total duty time
             TextView tvDutyTotal = (TextView) getView().findViewById(R.id.tv_duty_total);
-            tvDutyTotal.setText(Long.toString(mTotalDutyDateTime / 3600000));
+            tvDutyTotal.setText(dutyTime.add(mTotalDutyDateTime));
 
-            String dutyPeriod = sdf.format(blockOut) + " to " + sdf.format(blockIn) + " : "
-                    + (mTotalDutyDateTime / 3600000);
+            String dutyPeriod = sdf.format(dutyTime.StartDate) + " to " + sdf.format(dutyTime.EndDate) + " : "
+                    + dutyTime.ConvertedTime;
 
             mDutyPeriods.add(dutyPeriod);
 

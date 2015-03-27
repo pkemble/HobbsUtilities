@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.kemblep.hobbsutilities.obj.WxReport;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -95,17 +94,5 @@ public class Util {
         Util.setText(e, e.getText().toString().substring(4));
         e.setBackgroundColor(Color.TRANSPARENT);
         e.setSelection(1);
-    }
-
-    //if the end time is "before" the start time (i.e. went past midnight)
-    //then fix the day to reflect this.
-    public static Date fixEndTime(Date start, Date end) {
-        if(start.after(end)){
-            Calendar c = Calendar.getInstance();
-            c.setTime(end);
-            c.add(Calendar.DATE, 1);
-            end = c.getTime();
-        }
-        return end;
     }
 }

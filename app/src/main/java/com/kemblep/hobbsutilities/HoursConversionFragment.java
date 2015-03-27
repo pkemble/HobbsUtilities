@@ -14,7 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
+import com.kemblep.hobbsutilities.obj.HobbsTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -183,32 +184,19 @@ public class HoursConversionFragment extends Fragment {
 			
 			Date start = sdf.parse(etBlockIn.getText().toString());
 			Date end = sdf.parse(etBlockOut.getText().toString());
-			
-            end = Util.fixEndTime(start, end);
 
-			DecimalFormat preciseFormat = new DecimalFormat("0.##");
-			DecimalFormat finalFormat = new DecimalFormat("0.0");
+            HobbsTime hobbsTime = new HobbsTime(start, end);
 
-			double mills = (end.getTime() - start.getTime());
-			float convertedMills = (float) (mills / 3600000);
-			//float floatMills = Math.round((mills / 3600000) * 10) /10;
-			
-			String diff = preciseFormat.format(convertedMills);
-			Util.setText(result, finalFormat.format(convertedMills));
-			Log.v(TAG, "decimal format 0.00:" + diff
-					+ "\n milliseconds: " + mills
-					+ "\n decimal format 0.00: " + preciseFormat.format(convertedMills));
+            Util.setText(result, hobbsTime.ConvertedTime);
 			
 			//add to total
 			if(total.getText().toString().matches("")){
 				Util.setText(total, "0.0");
 			}
+
 			float totalFloat = Float.parseFloat(total.getText().toString());
-			totalFloat = convertedMills + totalFloat;
-			
-			Util.setText(total, finalFormat.format(totalFloat));		
-			
-			
+			Util.setText(total, hobbsTime.add(totalFloat));
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 			Log.d(TAG, e.getMessage());
