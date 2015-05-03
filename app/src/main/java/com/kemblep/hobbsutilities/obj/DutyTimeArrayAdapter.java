@@ -15,10 +15,10 @@ import java.util.ArrayList;
  * Created by Pete on 3/25/2015.
  */
 public class DutyTimeArrayAdapter extends BaseAdapter {
-    private ArrayList<String> mDutyPeriods;
+    private ArrayList<DutyPeriod> mDutyPeriods;
     private Context mContext;
 
-    public DutyTimeArrayAdapter(Context context, ArrayList<String> dutyPeriods){
+    public DutyTimeArrayAdapter(Context context, ArrayList<DutyPeriod> dutyPeriods){
         mContext = context;
         mDutyPeriods = dutyPeriods;
     }
@@ -48,7 +48,7 @@ public class DutyTimeArrayAdapter extends BaseAdapter {
         }
 
         TextView tvDutyPeriod = (TextView) convertView.findViewById(R.id.tv_duty_period);
-        tvDutyPeriod.setText(mDutyPeriods.get(position));
+        tvDutyPeriod.setText(mDutyPeriods.get(position).Information);
 
         return convertView;
     }

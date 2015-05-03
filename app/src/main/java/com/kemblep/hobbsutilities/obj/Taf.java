@@ -15,7 +15,7 @@ public class Taf {
 	private String mUrl = Strings.TafUrl;
 	private String mRadiusUrl = Strings.TafRadiusUrl;
 	private String mStation;
-	private String mTime;
+	private String mIssueTime;
 	private String[] mFmPeriod = null;
 	private String mNoData;
 	public String FormattedTaf;
@@ -31,7 +31,7 @@ public class Taf {
 			if(doc != null){
 				//TODO cast these better
 //				mStation = doc.getElementsByTagName("station_id").item(0).getTextContent();
-//				mTime = doc.getElementsByTagName("issue_time").item(0).getTextContent();
+//				mIssueTime = doc.getElementsByTagName("issue_time").item(0).getTextContent();
 				NodeList nodeList = doc.getElementsByTagName(mTafRawTextField);
 				if(nodeList.getLength() == 0){
 					//try to get a radius search

@@ -31,6 +31,7 @@
 	<string name="station_entry_title">Enter an ICAO station identifier:</string>
 
     <!-- 10in24 strings -->
-    <string name="duty_calculator_intro">duty calculator intro</string>
+    <string name="duty_calculator_intro">Enter block times which overlap the previous 24 hours. Periods beginning > 24 will be *truncated.</string>
     <string name="duty_times_blurb">Duty periods starting from 24 hours ago:</string>
+    <string name="duty_reset_times">Reset Duty From Time</string>
 </resources>

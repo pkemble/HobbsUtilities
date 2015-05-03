@@ -165,7 +165,6 @@ public class MainActivity extends ActionBarActivity {
 				args.putInt(ARG_SECTION_NUMBER, position + 1);
 				hoursConvFragment.setArguments(args);
 				return hoursConvFragment;
-
             case 1:
                 Fragment dutyTimeCalculator = new DutyTimeCalculator();
                 Bundle args1 = new Bundle();
@@ -207,6 +206,7 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
+            //TODO serialize these so they can be disabled
 			switch (position) {
 			case 0:
 				return getString(R.string.title_convert).toUpperCase(l);

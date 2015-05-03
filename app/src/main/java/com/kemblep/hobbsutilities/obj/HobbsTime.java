@@ -14,7 +14,7 @@ public class HobbsTime {
     private static final String TAG = HobbsTime.class.getName();
     public Date StartDate;
     public Date EndDate;
-    private float mTime;
+    public float Time;
     public String ConvertedTime;
     private DecimalFormat mFinalFormat = new DecimalFormat("0.0");
     private DecimalFormat mPreciseFormat = new DecimalFormat("0.##");
@@ -22,12 +22,12 @@ public class HobbsTime {
     public HobbsTime(Date start, Date end){
         StartDate = start;
         EndDate = fixEndTime(start, end);
-        mTime = convertTimesToHobbs(start, end);
-        ConvertedTime = formatPreciseTime(mTime);
+        Time = convertTimesToHobbs(StartDate, EndDate);
+        ConvertedTime = formatSimpleTime(Time);
     }
 
-    private String formatPreciseTime(float mTime) {
-        return mFinalFormat.format(mTime);
+    private String formatSimpleTime(float flTime) {
+        return mFinalFormat.format(flTime);
     }
 
     private float convertTimesToHobbs(Date start, Date end){
@@ -57,7 +57,7 @@ public class HobbsTime {
     }
 
     public String add(float addition){
-        float total = mTime + addition;
+        float total = Time + addition;
         return mFinalFormat.format(total);
     }
 }

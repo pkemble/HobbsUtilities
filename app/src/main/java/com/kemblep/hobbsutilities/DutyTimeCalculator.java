@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.kemblep.hobbsutilities.obj.DutyPeriod;
 import com.kemblep.hobbsutilities.obj.DutyTimeArrayAdapter;
-import com.kemblep.hobbsutilities.obj.HobbsTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +30,8 @@ public class DutyTimeCalculator extends Fragment {
     }
 
     private float mTotalDutyDateTime;
-    private ArrayList<String> mDutyPeriods = new ArrayList<>();
+    private static Date mCalculateFromTime;
+    private ArrayList<DutyPeriod> mDutyPeriods = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,13 +41,35 @@ public class DutyTimeCalculator extends Fragment {
 
         final EditText etDutyStart = (EditText) vDutyTimeCalculator.findViewById(R.id.et_duty_block_start);
         final EditText etDutyEnd = (EditText) vDutyTimeCalculator.findViewById(R.id.et_duty_block_end);
-        final Button btnReset = (Button) vDutyTimeCalculator.findViewById(R.id.btn_reset_duty_times);
+        final Button btnResetFields = (Button) vDutyTimeCalculator.findViewById(R.id.btn_reset_duty_times);
+        final Button btnResetDutyCount = (Button) vDutyTimeCalculator.findViewById(R.id.btn_reset_duty_count);
+        final TextView tvCurrentTime = (TextView) vDutyTimeCalculator.findViewById(R.id.tv_current_time);
+        final TextView tvDutyTotal = (TextView) vDutyTimeCalculator.findViewById(R.id.tv_duty_total);
 
-        btnReset.setOnClickListener(new View.OnClickListener(){
+        if (mCalculateFromTime == null) {
+            mCalculateFromTime = calculateFromTime(new Date());
+        }
+        tvCurrentTime.setText(shortFormat(mCalculateFromTime));
+
+        btnResetFields.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 resetTimes(etDutyStart, etDutyEnd);
+            }
+        });
+
+        btnResetDutyCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTimes(etDutyStart, etDutyEnd);
+                mTotalDutyDateTime = 0;
+                mDutyPeriods.clear();
+                ListView lvDutyBlocks = (ListView) getView().findViewById(R.id.lv_duty_times);
+                lvDutyBlocks.setAdapter(new DutyTimeArrayAdapter(getActivity().getApplicationContext(),
+                        mDutyPeriods));
+                tvDutyTotal.setTextColor(getResources().getColor(R.color.primary_text));
+                tvCurrentTime.setText(shortFormat(calculateFromTime(new Date())));
             }
         });
 
@@ -142,14 +165,15 @@ public class DutyTimeCalculator extends Fragment {
 
     private void addToDuty(EditText etDutyStart, EditText etDutyEnd, View vDutyTimeCalculator) {
         //get the current time
-        Date pre = new Date();
 
         try {
+            //TODO mCalculateFromTime should be used here
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             //make the current time relative to the other times below (i.e. 1970)
-            String sNow = sdf.format(pre);
+            String sNow = sdf.format(mCalculateFromTime);
             Date now = sdf.parse(sNow);
 
+            Calendar startCal = Calendar.getInstance();
             Calendar cal = Calendar.getInstance();
             cal.setTime(now);
             //make a relative time to compare to
@@ -160,28 +184,41 @@ public class DutyTimeCalculator extends Fragment {
 
         //parse the start time
             Date blockOut = sdf.parse(etDutyStart.getText().toString());
+            Calendar calBlockOut = Calendar.getInstance();
+            calBlockOut.setTime(blockOut);
+
 
         //parse the end time
             Date blockIn = sdf.parse(etDutyEnd.getText().toString());
+            Calendar calBlockIn = Calendar.getInstance();
+            calBlockIn.setTime(blockIn);
 
-        //if the end time is before now a day ago, return
-            if(blockIn.before(twentyFourAgo)){
-                return;
+        //if both times occur before the 24 hour time period, bump the day up
+            if(blockIn.before(twentyFourAgo) && blockOut.before(twentyFourAgo)){
+                calBlockIn.add(Calendar.DAY_OF_YEAR, 1);
+                calBlockOut.add(Calendar.DAY_OF_YEAR, 1);
+                blockIn = calBlockIn.getTime();
+                blockOut = calBlockOut.getTime();
             }
         //if the start time is before now a day ago, use now a day ago instead
+            boolean truncated = false;
             if(blockOut.before(twentyFourAgo)){
                 blockOut = twentyFourAgo;
+                calBlockOut.setTime(twentyFourAgo);
+                truncated = true;
             }
-        //make a hobbstime object
-            HobbsTime dutyTime = new HobbsTime(blockOut, blockIn);
+        //make a dutyPeriod object
+            DutyPeriod dutyPeriod = new DutyPeriod(blockOut, blockIn, truncated);
 
         //display the total duty time
             TextView tvDutyTotal = (TextView) getView().findViewById(R.id.tv_duty_total);
-            tvDutyTotal.setText(dutyTime.add(mTotalDutyDateTime));
+            tvDutyTotal.setText(dutyPeriod.add(mTotalDutyDateTime));
+            //TODO: 1.05 + 1.05 = 2.1 instead of the expected 2.0?
+            mTotalDutyDateTime += dutyPeriod.Time;
 
-            String dutyPeriod = sdf.format(dutyTime.StartDate) + " to " + sdf.format(dutyTime.EndDate) + " : "
-                    + dutyTime.ConvertedTime;
-
+            if(mTotalDutyDateTime > 10){
+                tvDutyTotal.setTextColor(getResources().getColor(R.color.exploding_soda_orange));
+            }
             mDutyPeriods.add(dutyPeriod);
 
             DutyTimeArrayAdapter dutyTimeArrayAdapter =
@@ -202,5 +239,19 @@ public class DutyTimeCalculator extends Fragment {
     public void resetTimes(EditText etBlockIn, EditText etBlockOut){
         Util.resetEditText(etBlockIn);
         Util.resetEditText(etBlockOut);
+    }
+
+    public Date calculateFromTime(Date now) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(now);
+        c.add(Calendar.HOUR_OF_DAY, -24);
+        now = c.getTime();
+        mCalculateFromTime = now;
+        return now;
+    }
+
+    public String shortFormat(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d; HH:mm");
+        return "Duty from " + sdf.format(date);
     }
 }
