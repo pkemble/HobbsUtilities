@@ -63,4 +63,4 @@
 	        android:layout_alignLeft="@+id/total"
 	        android:text="@string/reset_button_text" />
 
-</RelativeLayout><!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/layout/fragment_main.xml -->
+</RelativeLayout><!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/layout/fragment_main.xml -->

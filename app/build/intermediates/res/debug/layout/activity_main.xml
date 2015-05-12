@@ -3,4 +3,4 @@
     android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kemblep.hobbsutilities.MainActivity" /><!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/layout/activity_main.xml -->
+    tools:context="com.kemblep.hobbsutilities.MainActivity" /><!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/layout/activity_main.xml -->

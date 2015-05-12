@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -16,10 +16,10 @@
     <color name="abc_search_url_text_normal">#7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="accent">#03A9F4</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
@@ -39,20 +39,20 @@
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="divider">#B6B6B6</color>
     <color name="exploding_soda_orange">#F80</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="icons">#FFFFFF</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
@@ -61,25 +61,25 @@
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="primary">#2196F3</color>
     <color name="primary_dark">#1976D2</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="primary_light">#BBDEFB</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_material_dark">#ff212121</color>
     <color name="primary_material_light">#ffbdbdbd</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="primary_text">#212121</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_text_default_material_dark">#ffffffff</color>
     <color name="primary_text_default_material_light">#de000000</color>
@@ -87,11 +87,11 @@
     <color name="primary_text_disabled_material_light">#39000000</color>
     <color name="ripple_material_dark">#40ffffff</color>
     <color name="ripple_material_light">#40000000</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="safe_soda_green">#1D7300</color>
     <color name="secondary_text">#727272</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
@@ -99,7 +99,7 @@
     <color name="secondary_text_disabled_material_light">#24000000</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="transparent_grey">#99000000</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
@@ -125,7 +125,7 @@
     <declare-styleable name="Toolbar"><attr format="reference" name="titleTextAppearance"/><attr format="reference" name="subtitleTextAppearance"/><attr name="title"/><attr name="subtitle"/><attr name="android:gravity"/><attr format="dimension" name="titleMargins"/><attr format="dimension" name="titleMarginStart"/><attr format="dimension" name="titleMarginEnd"/><attr format="dimension" name="titleMarginTop"/><attr format="dimension" name="titleMarginBottom"/><attr name="contentInsetStart"/><attr name="contentInsetEnd"/><attr name="contentInsetLeft"/><attr name="contentInsetRight"/><attr format="dimension" name="maxButtonHeight"/><attr format="reference" name="theme"/><attr format="reference" name="collapseIcon"/><attr format="string" name="collapseContentDescription"/><attr name="popupTheme"/><attr format="reference" name="navigationIcon"/><attr format="string" name="navigationContentDescription"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
     <dimen name="abc_action_bar_default_padding_material">4dp</dimen>
@@ -164,11 +164,11 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -202,7 +202,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="airplane_mode">You\'re in airplane mode - unable to get weather!</string>
@@ -228,7 +228,7 @@
     <string name="title_quick_add">Quick Add</string>
     <string name="title_soda">Drink Bag</string>
     <string name="title_wx">Weather</string>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light"> 
         <!--
@@ -246,7 +246,7 @@
         
         <item name="android:actionBarStyle">@style/myActionBarStyle</item>
     </style>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>
@@ -1284,7 +1284,7 @@
     <style name="Widget.AppCompat.Spinner.DropDown.ActionBar" parent="Base.Widget.AppCompat.Spinner.DropDown.ActionBar"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="myActionBarStyle" parent="AppBaseTheme">
 		<item name="android:background">@color/primary</item>
