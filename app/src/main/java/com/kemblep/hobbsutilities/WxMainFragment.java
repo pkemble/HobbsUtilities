@@ -1,7 +1,5 @@
 package com.kemblep.hobbsutilities;
 
-import com.kemblep.hobbsutilities.obj.WxReport;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
@@ -19,42 +17,40 @@ import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import com.kemblep.hobbsutilities.obj.WxReport;
+
 public class WxMainFragment extends Fragment {
 	
-	public static boolean widgetClick = false;
-	private String _stationId = MainActivity.stationId;
+	private String mStationId = MainActivity.StationId;
 	
 	public WxMainFragment() {
-		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.wx_fragment_main, container,
-				false);
-		final View rv = rootView;
-		
-		final Button btnRefresh = (Button) rootView.findViewById(R.id.btn_refresh);
+		final View vWxMainFragment = inflater.inflate(R.layout.wx_fragment_main, container,	false);
+        final Button btnRefresh = (Button) vWxMainFragment.findViewById(R.id.btn_refresh);
+        final Button btnStation = (Button) vWxMainFragment.findViewById(R.id.btn_station);
 
 		btnRefresh.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				PopulateWx(rv);
+                Util.updateWx(MainActivity.StationId);
+				PopulateWx(vWxMainFragment);
 			}
 		});
 		
-		final Button btnStation = (Button) rootView.findViewById(R.id.btn_station);
-		if(_stationId != null){
-			btnStation.setText(_stationId);
+		if(mStationId != null){
+			btnStation.setText(mStationId);
 		}
 		btnStation.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder alert = new AlertDialog.Builder(rv.getContext());
+				AlertDialog.Builder alert = new AlertDialog.Builder(vWxMainFragment.getContext());
 				
 				final EditText input = new EditText(v.getContext());
 				alert.setView(input);
@@ -62,10 +58,10 @@ public class WxMainFragment extends Fragment {
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String newStationId = input.getText().toString().trim();
-						if(newStationId.length() == 3){
-							newStationId = "K" + newStationId;
+						if(newStationId.length() == 3 && !Character.isDigit(newStationId.charAt(0))){
+                            newStationId = "K" + newStationId;
 						}
-						_stationId = newStationId;
+						mStationId = newStationId;
 						btnStation.setText(newStationId);
 						Activity activity = getActivity();
 						SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
@@ -74,7 +70,7 @@ public class WxMainFragment extends Fragment {
 						edit.commit();
 						
 						Util.updateWx(newStationId);
-						PopulateWx(rv);
+						PopulateWx(vWxMainFragment);
 					}
 				});
 
@@ -88,16 +84,20 @@ public class WxMainFragment extends Fragment {
 				alert.show();
 			}
 		});
-		PopulateWx(rootView);
-		return rootView;
+		PopulateWx(vWxMainFragment);
+		return vWxMainFragment;
 	}
 
 	public void PopulateWx(View v){
 		TextView tvMetar = (TextView) v.findViewById(R.id.tv_metar);
 		TextView tvTaf = (TextView) v.findViewById(R.id.tv_taf);
-		if(Util.isAirplaneModeOn(getActivity())){
-			Util.setText(tvMetar, getString(R.string.airplane_mode));
-			return;
+		if(MainActivity.WeatherReport == null){
+            //try to update it
+            MainActivity.WeatherReport = new WxReport(MainActivity.StationId);
+            if(MainActivity.WeatherReport == null){
+                Util.setText(tvMetar, getString(R.string.airplane_mode));
+                return;
+            }
 		}
 		
 		WxReport wxReport = MainActivity.WeatherReport;

@@ -3,4 +3,15 @@
     android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kemblep.hobbsutilities.MainActivity" /><!-- From: file:/C:/Users/Pete/workspace/HobbsUtilities-import/app/src/main/res/layout/activity_main.xml -->
+    tools:context="com.kemblep.hobbsutilities.MainActivity">
+
+    <android.support.v4.view.PagerTabStrip
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="@color/primary"
+        android:textAppearance="@style/myPagerStyle"/>
+
+</android.support.v4.view.ViewPager><!-- From: file:/C:/Users/Pete/eclipse_workspace/HobbsUtilities/app/src/main/res/layout/activity_main.xml -->

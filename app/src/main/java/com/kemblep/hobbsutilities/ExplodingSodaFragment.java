@@ -1,33 +1,41 @@
 package com.kemblep.hobbsutilities;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.kemblep.hobbsutilities.obj.Forecast;
 import com.kemblep.hobbsutilities.obj.StationInfo;
+import com.kemblep.hobbsutilities.obj.TempArrayAdapter;
 
-public class ExplodingSodaFragment extends Fragment {
-	
-	private String _sodaStationId = MainActivity.sodaStationId;
+//import android.widget.ImageView;
 
-	public ExplodingSodaFragment() {
-		// TODO Auto-generated constructor stub
+public class ExplodingSodaFragment extends Fragment
+        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    private String mSodaStationId = MainActivity.SodaStationId;
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    private final String TAG = ExplodingSodaFragment.class.getName();
+
+    public ExplodingSodaFragment() {
 	}
 	
 	@Override
@@ -35,27 +43,16 @@ public class ExplodingSodaFragment extends Fragment {
 			Bundle savedInstanceState) {
 		
 		final View sodaView = inflater.inflate(R.layout.exploding_soda, container, false);
-		
-		final TextView tvTemp = (TextView) sodaView.findViewById(R.id.tv_exploding_soda);
-		final TextView tvSodaTime = (TextView) sodaView.findViewById(R.id.tv_soda_time);
-		final TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info);
-		//final Button btnSodaRefresh = (Button) sodaView.findViewById(R.id.btn_soda_refresh);
+		final Button btnLocate = (Button) sodaView.findViewById(R.id.btn_locate);
 		final Button btnSodaStation = (Button) sodaView.findViewById(R.id.btn_soda_station);
-		final ImageView imgSoda = (ImageView) sodaView.findViewById(R.id.img_soda);
-		
+
 		//http://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=stations&requestType=retrieve&format=xml&stationString=<STATION>
-		
-		//send the request
+
 		GetSodaFate(sodaView);
-		
-		imgSoda.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				GetSodaFate(sodaView);
-			}
-		});
-		
+        
+        buildGoogleApiClient();
+        createLocationRequest();
+
 		btnSodaStation.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -68,19 +65,14 @@ public class ExplodingSodaFragment extends Fragment {
 				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String newStationId = input.getText().toString().trim();
-						if(newStationId.length() == 3){
+                        //TODO handle blank entries
+						if(newStationId.length() == 3 && !Character.isDigit(newStationId.charAt(0))){
 							newStationId = "K" + newStationId;
 						}
-						_sodaStationId = newStationId;
-						btnSodaStation.setText(newStationId);
-						Activity activity = getActivity();
-						SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
-						SharedPreferences.Editor edit = sharedPref.edit();
-						edit.putString(getString(R.string.pref_default_soda_station_key), newStationId);
-						edit.commit();
-						
-						GetSodaFate(sodaView);
-
+                        if(newStationId.length() == 4){
+                            mSodaStationId = newStationId;
+                            GetSodaFate(sodaView);
+                        }
 					}
 				});
 
@@ -94,43 +86,102 @@ public class ExplodingSodaFragment extends Fragment {
 			}
 		});
 		
-		btnSodaStation.setText(_sodaStationId.toUpperCase());
+        btnLocate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mGoogleApiClient.connect();
+            }
+        });
 		
 		return sodaView;
 	}
 
-	private void GetSodaFate(View sodaView) {
-		ProgressBar spinner = (ProgressBar) sodaView.findViewById(R.id.soda_progress);
-		spinner.setVisibility(View.VISIBLE);
-		
-		StationInfo stationInfo = new StationInfo(_sodaStationId );
-		Forecast forecast = new Forecast(stationInfo.Latitude, stationInfo.Longitude);
-		
-		spinner.setVisibility(View.GONE);
-		String result;
-		TextView tvTemp = (TextView) sodaView.findViewById(R.id.tv_exploding_soda);
-		ImageView imgSoda = (ImageView) sodaView.findViewById(R.id.img_soda);
-		{
-			Float low = Float.parseFloat(forecast.NextLow);
-			if(low <= 32){
-				result = forecast.NextLow;
-				tvTemp.setTextColor(getResources().getColor(R.color.exploding_soda_orange));
-				imgSoda.setImageResource(R.drawable.soda_plode);
-			} else {
-				result = forecast.NextLow;
-				tvTemp.setTextColor(getResources().getColor(R.color.safe_soda_green));
-				imgSoda.setImageResource(R.drawable.soda);
-			}
-			
-			TextView tvSodaTime = (TextView) sodaView.findViewById(R.id.tv_soda_time);
-			TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info); 
-			
-			tvTemp.setText(result + (char) 0x00B0 + "F");
-			Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
-			Util.setText(tvMoreInfo, stationInfo.SiteId + " : " + forecast.Description + "\n" + forecast.moreInfoUrl);
-			
-			Linkify.addLinks(tvMoreInfo, Linkify.ALL);
+    private void createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(50000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
 
-		}
-	}
+    protected synchronized void buildGoogleApiClient() {
+        Activity mActivity = this.getActivity();
+        mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+        .build();
+
+    }
+    private void GetSodaFate(View sodaView){
+        StationInfo stationInfo = new StationInfo(mSodaStationId);
+        Forecast forecast = null;
+        if(stationInfo.Latitude != null && stationInfo.Longitude != null){
+            forecast = new Forecast(stationInfo.Latitude, stationInfo.Longitude);
+        }
+        GetSodaFate(sodaView, forecast);
+    }
+
+    private void GetSodaFate(View sodaView, Forecast forecast) {
+
+        ImageView ivMap = (ImageView) sodaView.findViewById(R.id.img_map);
+        if(ivMap != null && forecast != null && forecast.MapForecastLocation != null){
+            ivMap.setImageBitmap(forecast.MapForecastLocation);
+        }
+
+        TextView tvSodaTime = (TextView) sodaView.findViewById(R.id.tv_soda_time);
+        TextView tvMoreInfo = (TextView) sodaView.findViewById(R.id.tv_more_info);
+
+        if(forecast == null){
+            Util.setText(tvSodaTime, "No weather available. Check your network connection.");
+        } else {
+
+            if (!forecast.FCTimeTempMap.TimePeriods.isEmpty()) {
+                TempArrayAdapter tempArrayAdapter = new TempArrayAdapter(sodaView.getContext(), forecast);
+
+                ListView lvForecast = (ListView) sodaView.findViewById(R.id.lv_forecast);
+                lvForecast.setAdapter(tempArrayAdapter);
+            }
+
+            //tvTemp.setText(result + (char) 0x00B0 + "F");
+            Util.setText(tvSodaTime, "Refreshed at " + Util.getLocalTime());
+            Util.setText(tvMoreInfo, forecast.Description + "\n" + forecast.MoreInfoUrl);
+        }
+            Activity activity = getActivity();
+            SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
+            SharedPreferences.Editor edit = sharedPref.edit();
+            edit.putString(getString(R.string.pref_default_soda_station_key), mSodaStationId);
+            edit.commit();
+
+            Linkify.addLinks(tvMoreInfo, Linkify.ALL);
+
+
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.d(TAG, "onConnected");
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if(mLastLocation != null){
+            Log.d(TAG, "mLastLocation is not null!");
+            Forecast forecast =
+                    new Forecast(Double.toString(mLastLocation.getLatitude()),
+                            Double.toString(mLastLocation.getLongitude()));
+            if(forecast != null){
+                GetSodaFate(this.getView(), forecast);
+            }
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
 }
+

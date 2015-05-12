@@ -2,23 +2,25 @@
 <resources>
 
     <string name="app_name">Hobbs Utilities</string>
-    <string name="title_convert">Convert</string>
-    <string name="title_quick_add">Quick Add</string>
-    <string name="title_wx">Weather</string>
-    <string name="title_soda">Drink Bag</string>
-    <string name="introduction">Conversion Intro</string>
+    <string name="title_convert">Convert Block to Hobbs</string>
+    <string name="title_duty">Duty Calculator</string>
+    <string name="title_quick_add">Quick Add Hobbs</string>
+    <string name="title_wx">TAF &amp; METAR</string>
+    <string name="title_soda">Overnight Temps</string>
+    <string name="introduction">Type block times in quick succession without colons.</string>
     <string name="action_settings">Settings</string>
-    <string name="start_time_help">Start</string>
-    <string name="end_time_help">End</string>
+    <string name="block_out_time_hint">Block Out</string>
+    <string name="block_in_time_hint">Block In</string>
     <string name="reset_button_text">Reset</string>
     <string name="clear_button_text">Clear</string>
     <string name="invalid_times">Invalid time entry!</string>
-    <string name="quick_add_intro">Quick Add: Type in hobbs times in quick succession. Tap a time in the tally to subtract it.</string>
+    <string name="quick_add_intro">Quick Add: Type in Hobbs times in quick succession. Tap a time
+        in the tally to subtract it.</string>
     <string name="quick_add_reset_button">Reset</string>
     
     <!-- wx strings -->
     <string name="loading">Nothing yet...</string>
-    <string name="airplane_mode">You\'re in airplane mode - unable to get weather!</string>
+    <string name="airplane_mode">Unable to get the weather. A network connection might not be present.</string>
 	<string name="pref_default_station">Default Station</string>
 	<string name="pref_default_station_key">station</string>
 	<string name="pref_default_soda_station_key">soda_station</string>
@@ -28,4 +30,7 @@
 	<string name="taf_raw_text_field">raw_text</string>
 	<string name="station_entry_title">Enter an ICAO station identifier:</string>
 
+    <!-- 10in24 strings -->
+    <string name="duty_calculator_intro">duty calculator intro</string>
+    <string name="duty_times_blurb">Duty periods starting from 24 hours ago:</string>
 </resources>

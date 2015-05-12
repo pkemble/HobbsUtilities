@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
     <color name="transparent_grey">#99000000</color>
-    <color name="exploding_soda_orange">#F80</color>
-    <color name="safe_soda_green">#1D7300</color>
+    <color name="exploding_soda_orange">#f00</color>
+    <color name="safe_soda_green">#070</color>
     
     <!-- App theme -->
     <color name="primary">#2196F3</color>

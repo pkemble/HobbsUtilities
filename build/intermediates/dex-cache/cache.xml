@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-6ae1d6dcb9bc6b70d5c1b3af6aba9b73baff3240.jar" />
+    </item>
+    <item
+        jar="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\pre-dexed\debug\classes-7971699ed4b6f5857e7402fb0c0b66cfe623e615.jar" />
+    </item>
+    <item
+        jar="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\pre-dexed\debug\classes-18992f51262a9f1b4c6a0918b2e06755c6d17d58.jar" />
+    </item>
+    <item
+        jar="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-84c8a43bc8c9ccfaaa9f71027bb8116931a8eaf4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Users\Pete\eclipse_workspace\HobbsUtilities\app\build\intermediates\pre-dexed\debug\classes-9ee608e025a263de8dba748835f8ae517e8fa0fa.jar" />
+    </item>
+
+</items>

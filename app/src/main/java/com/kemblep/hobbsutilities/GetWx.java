@@ -1,17 +1,18 @@
 package com.kemblep.hobbsutilities;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
+import org.w3c.dom.Document;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-
-import android.content.res.Resources;
-import android.os.AsyncTask;
-import android.util.Log;
 
 public class GetWx extends AsyncTask<String, Void, Document> {
 
@@ -32,23 +33,27 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 		URL url;
 		
 		HttpURLConnection huc;
-		try {
-			url = new URL(urlStrings[0]);
-			//Log.d(TAG, "Opening connection to " + url);
-			huc = (HttpURLConnection) url.openConnection();
-			Log.d(TAG, "Getting input stream from " + url);
+
+        try {
+            url = new URL(urlStrings[0]);
+            //Log.d(TAG, "Opening connection to " + url);
+            huc = (HttpURLConnection) url.openConnection();
+            huc.setConnectTimeout(5000);
+            Log.d(TAG, "Getting input stream from " + url);
 			InputStream is = huc.getInputStream();
 			Log.d(TAG, "Input stream received from " + url);
 			doc = parseXML(is);
 			//Log.d(TAG, "Done parsing stream from" + url);
-			huc.disconnect();
-			//Log.d(TAG, "Disconnected from " + url);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return doc;
+            huc.disconnect();
+            //Log.d(TAG, "Disconnected from " + url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return doc;
 	}
 
 	private Document parseXML(InputStream inputStream) throws Exception
@@ -71,4 +76,3 @@ public class GetWx extends AsyncTask<String, Void, Document> {
 	        return doc;
 	}
 }
-
